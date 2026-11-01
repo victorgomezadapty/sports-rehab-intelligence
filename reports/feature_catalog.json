@@ -1,0 +1,1683 @@
+[
+  {
+    "catalog_key": "ric:STRIDE_RATE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "STRIDE_RATE",
+      "domain": "spatiotemporal",
+      "unit": "strides/min",
+      "source_matrix_row": "3",
+      "phase": "successive ipsilateral touchdowns",
+      "definition": "Median of 60*hz/diff(TD); not steps/min and not Hz",
+      "source_line_start": "776",
+      "source_line_end": "781",
+      "source_expressions": "temp = sort(60*hz./diff(L_TD(:))); | DISCRETE_VARIABLES(3,2)=median(temp); | temp = sort(60*hz./diff(R_TD(:))); | DISCRETE_VARIABLES(3,3)=median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:STRIDE_LENGTH",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "STRIDE_LENGTH",
+      "domain": "spatiotemporal",
+      "unit": "m",
+      "source_matrix_row": "4",
+      "phase": "successive ipsilateral touchdowns",
+      "definition": "Median of source heel-derived speed * diff(TD)/hz",
+      "source_line_start": "782",
+      "source_line_end": "787",
+      "source_expressions": "temp = sort((vel)*diff(L_TD(:))./hz); | DISCRETE_VARIABLES(4,2)=median(temp); | temp = sort((vel)*diff(R_TD(:))./hz); | DISCRETE_VARIABLES(4,3)=median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:SWING_TIME",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "SWING_TIME",
+      "domain": "spatiotemporal",
+      "unit": "s",
+      "source_matrix_row": "5",
+      "phase": "toe-off to next ipsilateral touchdown",
+      "definition": "Median swing-frame interval / hz",
+      "source_line_start": "788",
+      "source_line_end": "801",
+      "source_expressions": "temp = sort((L_swing_frames)/hz); | DISCRETE_VARIABLES(5,2)=nanmedian(temp); | temp = sort((R_swing_frames)/hz); | DISCRETE_VARIABLES(5,3)=nanmedian(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:STANCE_TIME",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "STANCE_TIME",
+      "domain": "spatiotemporal",
+      "unit": "s",
+      "source_matrix_row": "6",
+      "phase": "touchdown to toe-off",
+      "definition": "Median stance-frame interval / hz",
+      "source_line_start": "802",
+      "source_line_end": "807",
+      "source_expressions": "temp = sort((L_TO-L_TD)/hz); | DISCRETE_VARIABLES(6,2)=nanmedian(temp); | temp = sort((R_TO-R_TD)/hz); | DISCRETE_VARIABLES(6,3)=nanmedian(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:ANKLE_DF_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "ANKLE_DF_PEAK_ANGLE",
+      "domain": "ankle",
+      "unit": "deg",
+      "source_matrix_row": "11",
+      "phase": "whole normalized stance",
+      "definition": "Negative median of per-stance minimum axis-3 angle; both sides",
+      "source_line_start": "848",
+      "source_line_end": "865",
+      "source_expressions": "temp = sort(min(norm_ang.L_ankle(:,:,3))); | DISCRETE_VARIABLES(11,2)= - median(temp); | temp = sort(min(norm_ang.R_ankle(:,:,3))); | DISCRETE_VARIABLES(11,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:ANKLE_EVE_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "ANKLE_EVE_PEAK_ANGLE",
+      "domain": "ankle",
+      "unit": "deg",
+      "source_matrix_row": "15",
+      "phase": "whole normalized stance",
+      "definition": "Left median minimum axis 1; right negative median maximum axis 1",
+      "source_line_start": "869",
+      "source_line_end": "874",
+      "source_expressions": "temp = sort(min(norm_ang.L_ankle(:,:,1))); | DISCRETE_VARIABLES(15,2)= median(temp); | temp = sort(max(norm_ang.R_ankle(:,:,1))); | DISCRETE_VARIABLES(15,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:ANKLE_ROT_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "ANKLE_ROT_PEAK_ANGLE",
+      "domain": "ankle",
+      "unit": "deg",
+      "source_matrix_row": "19",
+      "phase": "whole normalized stance",
+      "definition": "Preserve exact source left/right rotation convention; see source expressions",
+      "source_line_start": "970",
+      "source_line_end": "975",
+      "source_expressions": "temp = sort(min(norm_ang.L_ankle(:,:,2))); | DISCRETE_VARIABLES(19,2)= median(temp); | temp = sort(max(norm_ang.R_ankle(:,:,2))); | DISCRETE_VARIABLES(19,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:KNEE_FLEX_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "KNEE_FLEX_PEAK_ANGLE",
+      "domain": "knee",
+      "unit": "deg",
+      "source_matrix_row": "23",
+      "phase": "first 70 of 101 normalized stance samples",
+      "definition": "Negative median of per-stance axis-3 maximum in samples 1:70; negative values are allowed",
+      "source_line_start": "998",
+      "source_line_end": "1015",
+      "source_expressions": "temp = sort(max(norm_ang.L_knee(1:70,:,3))); | DISCRETE_VARIABLES(23,2)= - median(temp); | temp = sort(max(norm_ang.R_knee(1:70,:,3))); | DISCRETE_VARIABLES(23,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:KNEE_ADD_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "KNEE_ADD_PEAK_ANGLE",
+      "domain": "knee",
+      "unit": "deg",
+      "source_matrix_row": "27",
+      "phase": "whole normalized stance",
+      "definition": "Left median maximum axis 1; right negative median minimum axis 1",
+      "source_line_start": "1019",
+      "source_line_end": "1024",
+      "source_expressions": "temp = sort(max(norm_ang.L_knee(:,:,1))); | DISCRETE_VARIABLES(27,2)= median(temp); | temp = sort(min(norm_ang.R_knee(:,:,1))); | DISCRETE_VARIABLES(27,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:KNEE_ROT_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "KNEE_ROT_PEAK_ANGLE",
+      "domain": "knee",
+      "unit": "deg",
+      "source_matrix_row": "35",
+      "phase": "whole normalized stance",
+      "definition": "Left median maximum axis 2; right negative median minimum axis 2",
+      "source_line_start": "1063",
+      "source_line_end": "1068",
+      "source_expressions": "temp = sort(max(norm_ang.L_knee(:,:,2))); | DISCRETE_VARIABLES(35,2) = median(temp(1,:)); | temp = sort(min(norm_ang.R_knee(:,:,2))); | DISCRETE_VARIABLES(35,3) = - median(temp(1,:));",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:HIP_EXT_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "HIP_EXT_PEAK_ANGLE",
+      "domain": "hip",
+      "unit": "deg",
+      "source_matrix_row": "39",
+      "phase": "whole normalized stance",
+      "definition": "Negative median of per-stance maximum axis-3 angle; both sides",
+      "source_line_start": "1091",
+      "source_line_end": "1110",
+      "source_expressions": "temp = sort(max(norm_ang.L_hip(:,:,3))); | DISCRETE_VARIABLES(39,2)= - median(temp); | temp = sort(max(norm_ang.R_hip(:,:,3))); | DISCRETE_VARIABLES(39,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:HIP_ADD_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "HIP_ADD_PEAK_ANGLE",
+      "domain": "hip",
+      "unit": "deg",
+      "source_matrix_row": "43",
+      "phase": "first 60 of 101 normalized stance samples",
+      "definition": "Left median maximum axis 1; right negative median minimum axis 1; samples 1:60",
+      "source_line_start": "1114",
+      "source_line_end": "1133",
+      "source_expressions": "temp = sort(max(norm_ang.L_hip(1:60,:,1))); | DISCRETE_VARIABLES(43,2)= median(temp); | temp = sort(min(norm_ang.R_hip(1:60,:,1))); | DISCRETE_VARIABLES(43,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "ric:HIP_ROT_PEAK_ANGLE",
+    "source_id": "ric",
+    "source_file": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+    "original_definition": {
+      "feature": "HIP_ROT_PEAK_ANGLE",
+      "domain": "hip",
+      "unit": "deg",
+      "source_matrix_row": "47",
+      "phase": "whole normalized stance",
+      "definition": "Left median maximum axis 2; right negative median minimum axis 2; do not relabel as generic internal rotation",
+      "source_line_start": "1142",
+      "source_line_end": "1159",
+      "source_expressions": "temp = sort(max(norm_ang.L_hip(:,:,2))); | DISCRETE_VARIABLES(47,2)= median(temp); | temp = sort(min(norm_ang.R_hip(:,:,2))); | DISCRETE_VARIABLES(47,3)= - median(temp);",
+      "source_code": "data/raw/official_code/Supplemental_materials/Code/gait_steps.m",
+      "source_code_sha256": "69f0134ba07732ba8c80d0a1e7b92f6d1efe057f856d90a8f968f360226a0472",
+      "transformation": "identity; preserve upstream scalar and sign",
+      "verification_scope": "source definition / units checked; event and reconstruction parity unverified"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_3d",
+      "domain": "Volume",
+      "definition": "Sum of total km in last 3 days",
+      "window": "E-3..E-1",
+      "units": "km",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z3_4_distance_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z3_4_distance_3d",
+      "domain": "Intensity",
+      "definition": "Sum of km Z3-4 in last 3 days",
+      "window": "E-3..E-1",
+      "units": "km",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z5_t1_t2_distance_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z5_t1_t2_distance_3d",
+      "domain": "Intensity",
+      "definition": "Sum of km Z5-T1-T2 in last 3 days",
+      "window": "E-3..E-1",
+      "units": "km",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:sprint_distance_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "sprint_distance_3d",
+      "domain": "Intensity",
+      "definition": "Sum of km sprinting in last 3 days",
+      "window": "E-3..E-1",
+      "units": "km",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:sessions_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "sessions_3d",
+      "domain": "Training frequency",
+      "definition": "Sum of nr. sessions in last 3 days",
+      "window": "E-3..E-1",
+      "units": "sessions",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:strength_sessions_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "strength_sessions_3d",
+      "domain": "Strength",
+      "definition": "Sum of strength training in last 3 days",
+      "window": "E-3..E-1",
+      "units": "logged sessions",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:cross_training_hours_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "cross_training_hours_3d",
+      "domain": "Cross training",
+      "definition": "Sum of hours alternative in last 3 days",
+      "window": "E-3..E-1",
+      "units": "hours",
+      "minimum_required_data": "3 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:rest_days_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "rest_days_3d",
+      "domain": "Rest",
+      "definition": "Count days with nr. sessions == 0; zero running km alone is not rest",
+      "window": "E-3..E-1",
+      "units": "days",
+      "minimum_required_data": "3 observed session counts",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Training-free days",
+      "limitations": "Not sleep or biological recovery; original session coding"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:mean_exertion_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "mean_exertion_3d",
+      "domain": "Subjective",
+      "definition": "Mean perceived exertion excluding -0.01 sentinel",
+      "window": "E-3..E-1",
+      "units": "released 0-1 rating",
+      "minimum_required_data": "At least 1 recorded rating; accompanying count mandatory",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Perceived response",
+      "limitations": "Not Borg scale; personal scale usage; absent on rest days"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:observed_exertion_days_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "observed_exertion_days_3d",
+      "domain": "Availability",
+      "definition": "Count ratings other than -0.01 for perceived exertion",
+      "window": "E-3..E-1",
+      "units": "days",
+      "minimum_required_data": "3 recorded days including rest sentinel",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low temporal risk; recording-process proxy",
+      "clinical_interpretation": "Rating availability only",
+      "limitations": "May encode rest and habits"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:mean_training_success_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "mean_training_success_3d",
+      "domain": "Subjective",
+      "definition": "Mean perceived trainingSuccess excluding -0.01 sentinel",
+      "window": "E-3..E-1",
+      "units": "released 0-1 rating",
+      "minimum_required_data": "At least 1 recorded rating; accompanying count mandatory",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Perceived response",
+      "limitations": "Not Borg scale; personal scale usage; absent on rest days"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:observed_training_success_days_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "observed_training_success_days_3d",
+      "domain": "Availability",
+      "definition": "Count ratings other than -0.01 for perceived trainingSuccess",
+      "window": "E-3..E-1",
+      "units": "days",
+      "minimum_required_data": "3 recorded days including rest sentinel",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low temporal risk; recording-process proxy",
+      "clinical_interpretation": "Rating availability only",
+      "limitations": "May encode rest and habits"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:mean_recovery_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "mean_recovery_3d",
+      "domain": "Recovery",
+      "definition": "Mean perceived recovery excluding -0.01 sentinel",
+      "window": "E-3..E-1",
+      "units": "released 0-1 rating",
+      "minimum_required_data": "At least 1 recorded rating; accompanying count mandatory",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Perceived response",
+      "limitations": "Not Borg scale; personal scale usage; absent on rest days"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:observed_recovery_days_3d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "observed_recovery_days_3d",
+      "domain": "Availability",
+      "definition": "Count ratings other than -0.01 for perceived recovery",
+      "window": "E-3..E-1",
+      "units": "days",
+      "minimum_required_data": "3 recorded days including rest sentinel",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low temporal risk; recording-process proxy",
+      "clinical_interpretation": "Rating availability only",
+      "limitations": "May encode rest and habits"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_7d",
+      "domain": "Volume",
+      "definition": "Sum of total km in last 7 days",
+      "window": "E-7..E-1",
+      "units": "km",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z3_4_distance_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z3_4_distance_7d",
+      "domain": "Intensity",
+      "definition": "Sum of km Z3-4 in last 7 days",
+      "window": "E-7..E-1",
+      "units": "km",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z5_t1_t2_distance_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z5_t1_t2_distance_7d",
+      "domain": "Intensity",
+      "definition": "Sum of km Z5-T1-T2 in last 7 days",
+      "window": "E-7..E-1",
+      "units": "km",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:sprint_distance_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "sprint_distance_7d",
+      "domain": "Intensity",
+      "definition": "Sum of km sprinting in last 7 days",
+      "window": "E-7..E-1",
+      "units": "km",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:sessions_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "sessions_7d",
+      "domain": "Training frequency",
+      "definition": "Sum of nr. sessions in last 7 days",
+      "window": "E-7..E-1",
+      "units": "sessions",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:strength_sessions_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "strength_sessions_7d",
+      "domain": "Strength",
+      "definition": "Sum of strength training in last 7 days",
+      "window": "E-7..E-1",
+      "units": "logged sessions",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:cross_training_hours_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "cross_training_hours_7d",
+      "domain": "Cross training",
+      "definition": "Sum of hours alternative in last 7 days",
+      "window": "E-7..E-1",
+      "units": "hours",
+      "minimum_required_data": "7 observed daily values in own event row",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row; high if missing dates filled from future event windows",
+      "clinical_interpretation": "Recent exposure, not tissue damage",
+      "limitations": "Selected windows; overlapping records; review extrema"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:rest_days_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "rest_days_7d",
+      "domain": "Rest",
+      "definition": "Count days with nr. sessions == 0; zero running km alone is not rest",
+      "window": "E-7..E-1",
+      "units": "days",
+      "minimum_required_data": "7 observed session counts",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Training-free days",
+      "limitations": "Not sleep or biological recovery; original session coding"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:mean_exertion_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "mean_exertion_7d",
+      "domain": "Subjective",
+      "definition": "Mean perceived exertion excluding -0.01 sentinel",
+      "window": "E-7..E-1",
+      "units": "released 0-1 rating",
+      "minimum_required_data": "At least 1 recorded rating; accompanying count mandatory",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Perceived response",
+      "limitations": "Not Borg scale; personal scale usage; absent on rest days"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:observed_exertion_days_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "observed_exertion_days_7d",
+      "domain": "Availability",
+      "definition": "Count ratings other than -0.01 for perceived exertion",
+      "window": "E-7..E-1",
+      "units": "days",
+      "minimum_required_data": "7 recorded days including rest sentinel",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low temporal risk; recording-process proxy",
+      "clinical_interpretation": "Rating availability only",
+      "limitations": "May encode rest and habits"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:mean_training_success_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "mean_training_success_7d",
+      "domain": "Subjective",
+      "definition": "Mean perceived trainingSuccess excluding -0.01 sentinel",
+      "window": "E-7..E-1",
+      "units": "released 0-1 rating",
+      "minimum_required_data": "At least 1 recorded rating; accompanying count mandatory",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Perceived response",
+      "limitations": "Not Borg scale; personal scale usage; absent on rest days"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:observed_training_success_days_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "observed_training_success_days_7d",
+      "domain": "Availability",
+      "definition": "Count ratings other than -0.01 for perceived trainingSuccess",
+      "window": "E-7..E-1",
+      "units": "days",
+      "minimum_required_data": "7 recorded days including rest sentinel",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low temporal risk; recording-process proxy",
+      "clinical_interpretation": "Rating availability only",
+      "limitations": "May encode rest and habits"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:mean_recovery_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "mean_recovery_7d",
+      "domain": "Recovery",
+      "definition": "Mean perceived recovery excluding -0.01 sentinel",
+      "window": "E-7..E-1",
+      "units": "released 0-1 rating",
+      "minimum_required_data": "At least 1 recorded rating; accompanying count mandatory",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low in own row",
+      "clinical_interpretation": "Perceived response",
+      "limitations": "Not Borg scale; personal scale usage; absent on rest days"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:observed_recovery_days_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "observed_recovery_days_7d",
+      "domain": "Availability",
+      "definition": "Count ratings other than -0.01 for perceived recovery",
+      "window": "E-7..E-1",
+      "units": "days",
+      "minimum_required_data": "7 recorded days including rest sentinel",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low temporal risk; recording-process proxy",
+      "clinical_interpretation": "Rating availability only",
+      "limitations": "May encode rest and habits"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:combined_intensity_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "combined_intensity_7d",
+      "domain": "Quality audit",
+      "definition": "Sum Z3-4, Z5/T1/T2 and sprint km solely to reconcile source weekly aggregate",
+      "window": "E-7..E-1",
+      "units": "km",
+      "minimum_required_data": "7 observed daily blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within own row; audit only",
+      "clinical_interpretation": "Confirms source coding; no independent clinical interpretation",
+      "limitations": "Not used as a model feature or separate outcome contrast"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_14d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_14d",
+      "domain": "Volume",
+      "definition": "Sum two weekly distance blocks",
+      "window": "E-14..E-1",
+      "units": "km",
+      "minimum_required_data": "2 complete original weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Use original weekly own-row blocks",
+      "clinical_interpretation": "Longer recent exposure",
+      "limitations": "Implemented Phase 2 using original weekly blocks; not used in Day baseline models"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_21d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_21d",
+      "domain": "Volume",
+      "definition": "Sum three weekly distance blocks",
+      "window": "E-21..E-1",
+      "units": "km",
+      "minimum_required_data": "3 complete original weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Use original weekly own-row blocks",
+      "clinical_interpretation": "Three-week exposure",
+      "limitations": "Implemented Phase 2 using original weekly blocks; not used in Day baseline models"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_28d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_28d",
+      "domain": "Volume",
+      "definition": "28-day running total",
+      "window": "E-28..E-1",
+      "units": "km",
+      "minimum_required_data": "28 prospectively observed days",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "HIGH if stitching future windows or treating gaps as zero",
+      "clinical_interpretation": "Longer exposure",
+      "limitations": "Deferred; not guaranteed in release"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_change_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_change_7d",
+      "domain": "Trend",
+      "definition": "Week-0 minus week-1 distance",
+      "window": "E-14..E-1",
+      "units": "km",
+      "minimum_required_data": "2 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low using original own-row blocks",
+      "clinical_interpretation": "Change in exposure",
+      "limitations": "Implemented Phase 2 using original weekly blocks; not used in Day baseline models"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:relative_distance",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "relative_distance",
+      "domain": "Relative Load",
+      "definition": "Current week minus prior-only personal baseline; scale by prior SD with a minimum history rule",
+      "window": "Current E-7..E-1 versus history ending E-8",
+      "units": "SD or km",
+      "minimum_required_data": "At least 28 prior truly available days; assess feasibility",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "HIGH with full-athlete/future normalization",
+      "clinical_interpretation": "Unusual relative to own history",
+      "limitations": "Deferred pending as-of history audit; unstable low SD"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:load_recovery_interaction",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "load_recovery_interaction",
+      "domain": "Interaction",
+      "definition": "Prespecified distance_7d times mean_recovery_7d after training-fold centering",
+      "window": "E-7..E-1",
+      "units": "product",
+      "minimum_required_data": "Both parent variables",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Fit centering on train only",
+      "clinical_interpretation": "Joint load/response hypothesis",
+      "limitations": "Proposed only; statistical interaction is not treatment effect"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z3_4_distance_14d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z3_4_distance_14d",
+      "domain": "Intensity",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-14..E-1",
+      "units": "km",
+      "minimum_required_data": "2 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z5_t1_t2_distance_14d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z5_t1_t2_distance_14d",
+      "domain": "Intensity",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-14..E-1",
+      "units": "km",
+      "minimum_required_data": "2 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:rest_days_14d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "rest_days_14d",
+      "domain": "Rest",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-14..E-1",
+      "units": "days",
+      "minimum_required_data": "2 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:strength_sessions_14d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "strength_sessions_14d",
+      "domain": "Strength",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-14..E-1",
+      "units": "logged sessions",
+      "minimum_required_data": "2 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:cross_training_hours_14d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "cross_training_hours_14d",
+      "domain": "Cross training",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-14..E-1",
+      "units": "hours",
+      "minimum_required_data": "2 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z3_4_distance_21d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z3_4_distance_21d",
+      "domain": "Intensity",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-21..E-1",
+      "units": "km",
+      "minimum_required_data": "3 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:z5_t1_t2_distance_21d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "z5_t1_t2_distance_21d",
+      "domain": "Intensity",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-21..E-1",
+      "units": "km",
+      "minimum_required_data": "3 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:rest_days_21d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "rest_days_21d",
+      "domain": "Rest",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-21..E-1",
+      "units": "days",
+      "minimum_required_data": "3 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:strength_sessions_21d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "strength_sessions_21d",
+      "domain": "Strength",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-21..E-1",
+      "units": "logged sessions",
+      "minimum_required_data": "3 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:cross_training_hours_21d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "cross_training_hours_21d",
+      "domain": "Cross training",
+      "definition": "Sum complete original weekly blocks in own event row",
+      "window": "E-21..E-1",
+      "units": "hours",
+      "minimum_required_data": "3 complete weekly blocks",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Low within original row; existing source selection persists",
+      "clinical_interpretation": "Prior exposure; no causal or clinical threshold",
+      "limitations": "Prepared Phase 2; not entered in Day model comparison"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:prior_expected_distance_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "prior_expected_distance_7d",
+      "domain": "Athlete Baseline",
+      "definition": "7 times mean unique prior-day distance; source event plus 21-day ascertainment must precede E",
+      "window": "E-63..E-8 with source ascertainment < E",
+      "units": "km",
+      "minimum_required_data": "28 observed unique prior days in 56-day window",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Prior-only ledger; no labels used; source selection and unknown logging times persist",
+      "clinical_interpretation": "Historical exposure level",
+      "limitations": "Known-athlete sensitivity only; missing dates not zero-filled; not a population biological baseline"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:distance_deviation_7d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "distance_deviation_7d",
+      "domain": "Relative Load",
+      "definition": "distance_7d minus prior_expected_distance_7d",
+      "window": "E-7..E-1 versus prior E-63..E-8",
+      "units": "km",
+      "minimum_required_data": "Current history plus available prior baseline",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Prior-only ledger and training-only preprocessing",
+      "clinical_interpretation": "Deviation from prior source-observed exposure",
+      "limitations": "Not causality; replaces total distance alongside expected baseline in known-athlete sensitivity"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:prior_observed_days_56d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "prior_observed_days_56d",
+      "domain": "Availability",
+      "definition": "Count prior unique days meeting source ascertainment delay",
+      "window": "E-63..E-8",
+      "units": "days",
+      "minimum_required_data": "Past source windows only",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Audit only; not a predictor",
+      "clinical_interpretation": "Coverage of retained prior history",
+      "limitations": "Not complete time at risk"
+    }
+  },
+  {
+    "catalog_key": "competitive_runners:prior_coverage_56d",
+    "source_id": "competitive_runners",
+    "source_file": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature_name": "prior_coverage_56d",
+      "domain": "Availability",
+      "definition": "prior_observed_days_56d divided by 56",
+      "window": "E-63..E-8",
+      "units": "fraction",
+      "minimum_required_data": "Past source windows only",
+      "prediction_time_available": "End of E-1",
+      "leakage_risk": "Audit only; not a predictor",
+      "clinical_interpretation": "Source-history coverage",
+      "limitations": "Not actual recording compliance"
+    }
+  },
+  {
+    "catalog_key": "european_football:event_id",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "event_id",
+      "grain": "source record",
+      "role": "lineage",
+      "definition": "Source CSV row-based identifier",
+      "units": "identifier",
+      "timing_status": "source lineage",
+      "limitation": "Stable only within this source version"
+    }
+  },
+  {
+    "catalog_key": "european_football:source_row",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "source_row",
+      "grain": "source record",
+      "role": "lineage",
+      "definition": "CSV line number with header on line 1",
+      "units": "integer",
+      "timing_status": "source lineage",
+      "limitation": "Not a verified event ID"
+    }
+  },
+  {
+    "catalog_key": "european_football:player_id",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "player_id",
+      "grain": "recorded name",
+      "role": "identity",
+      "definition": "Hash of exact NFC trimmed name",
+      "units": "identifier",
+      "timing_status": "unverified",
+      "limitation": "Homonyms and spelling variants unresolved"
+    }
+  },
+  {
+    "catalog_key": "european_football:player_name",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "player_name",
+      "grain": "source record",
+      "role": "identity",
+      "definition": "Recorded player name",
+      "units": "text",
+      "timing_status": "unverified",
+      "limitation": "No date of birth or stable upstream ID"
+    }
+  },
+  {
+    "catalog_key": "european_football:club",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "club",
+      "grain": "source record",
+      "role": "context",
+      "definition": "Club label in the source",
+      "units": "text",
+      "timing_status": "onset timing unverified",
+      "limitation": "May repeat episodes across clubs"
+    }
+  },
+  {
+    "catalog_key": "european_football:league",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "league",
+      "grain": "source record",
+      "role": "context",
+      "definition": "League label in the source",
+      "units": "text",
+      "timing_status": "onset timing unverified",
+      "limitation": "No population exposure denominator"
+    }
+  },
+  {
+    "catalog_key": "european_football:season",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "season",
+      "grain": "source record",
+      "role": "context",
+      "definition": "Source season label",
+      "units": "text",
+      "timing_status": "context",
+      "limitation": "Not actual allocation of days across seasons"
+    }
+  },
+  {
+    "catalog_key": "european_football:position",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "position",
+      "grain": "source record",
+      "role": "context",
+      "definition": "Detailed recorded playing position",
+      "units": "text",
+      "timing_status": "onset timing unverified",
+      "limitation": "Changing position and role not tracked"
+    }
+  },
+  {
+    "catalog_key": "european_football:age_recorded",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "age_recorded",
+      "grain": "source record",
+      "role": "context",
+      "definition": "Parsed source age",
+      "units": "years",
+      "timing_status": "onset timing unverified",
+      "limitation": "Not independently verified age at onset"
+    }
+  },
+  {
+    "catalog_key": "european_football:age_group",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "age_group",
+      "grain": "source record",
+      "role": "descriptive",
+      "definition": "Recorded age bands <=20 / 21-25 / 26-30 / 31-35 / 36+",
+      "units": "category",
+      "timing_status": "onset timing unverified",
+      "limitation": "Descriptive bands without causal meaning"
+    }
+  },
+  {
+    "catalog_key": "european_football:injury_type_raw",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "injury_type_raw",
+      "grain": "source record",
+      "role": "context",
+      "definition": "Trimmed source absence label with case retained",
+      "units": "text",
+      "timing_status": "diagnosis timing unverified",
+      "limitation": "Includes illness and non-injury absence"
+    }
+  },
+  {
+    "catalog_key": "european_football:injury_label_key",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "injury_label_key",
+      "grain": "source record",
+      "role": "recurrence key",
+      "definition": "Casefold and whitespace normalization only",
+      "units": "text",
+      "timing_status": "diagnosis timing unverified",
+      "limitation": "Not anatomical identity or clinical reinjury"
+    }
+  },
+  {
+    "catalog_key": "european_football:injury_start",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "injury_start",
+      "grain": "source record",
+      "role": "date",
+      "definition": "Parsed onset using explicit US or ISO format",
+      "units": "date",
+      "timing_status": "recording time unverified",
+      "limitation": "Clinical onset not independently confirmed"
+    }
+  },
+  {
+    "catalog_key": "european_football:injury_end",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "injury_end",
+      "grain": "source record",
+      "role": "outcome",
+      "definition": "Parsed recorded end",
+      "units": "date",
+      "timing_status": "post onset",
+      "limitation": "Does not establish medical clearance or first match return"
+    }
+  },
+  {
+    "catalog_key": "european_football:reported_days_out",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "reported_days_out",
+      "grain": "source record",
+      "role": "outcome",
+      "definition": "Numeric conversion of original Days",
+      "units": "days",
+      "timing_status": "post onset",
+      "limitation": "Original value retained without overwriting"
+    }
+  },
+  {
+    "catalog_key": "european_football:calculated_days_out",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "calculated_days_out",
+      "grain": "source record",
+      "role": "audit",
+      "definition": "Recorded end minus recorded start",
+      "units": "exclusive days",
+      "timing_status": "post onset",
+      "limitation": "Keep separate from reported inclusive duration"
+    }
+  },
+  {
+    "catalog_key": "european_football:duration_difference",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "duration_difference",
+      "grain": "source record",
+      "role": "audit",
+      "definition": "Reported minus calculated days",
+      "units": "days",
+      "timing_status": "post onset",
+      "limitation": "Convention diagnostic"
+    }
+  },
+  {
+    "catalog_key": "european_football:days_out",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "days_out",
+      "grain": "source record",
+      "role": "analysis outcome",
+      "definition": "Reported nonnegative integral days otherwise missing",
+      "units": "days",
+      "timing_status": "post onset",
+      "limitation": "Episode duration not forecast"
+    }
+  },
+  {
+    "catalog_key": "european_football:games_missed",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "games_missed",
+      "grain": "source record",
+      "role": "outcome",
+      "definition": "Numeric original missed matches",
+      "units": "matches",
+      "timing_status": "post onset",
+      "limitation": "Competition and eligibility coverage unknown"
+    }
+  },
+  {
+    "catalog_key": "european_football:games_missed_valid",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "games_missed_valid",
+      "grain": "source record",
+      "role": "analysis outcome",
+      "definition": "Reported nonnegative integral matches otherwise missing",
+      "units": "matches",
+      "timing_status": "post onset",
+      "limitation": "Overlaps can repeat matches"
+    }
+  },
+  {
+    "catalog_key": "european_football:injury_month",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "injury_month",
+      "grain": "source record",
+      "role": "calendar",
+      "definition": "Month of parsed recorded onset",
+      "units": "YYYY-MM",
+      "timing_status": "recording time unverified",
+      "limitation": "Entire episode burden assigned to onset month"
+    }
+  },
+  {
+    "catalog_key": "european_football:exact_duplicate",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "exact_duplicate",
+      "grain": "source record",
+      "role": "quality",
+      "definition": "Whole source row duplicates an earlier row",
+      "units": "boolean",
+      "timing_status": "source audit",
+      "limitation": "Only automatic primary record exclusion"
+    }
+  },
+  {
+    "catalog_key": "european_football:potential_duplicate_episode",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "potential_duplicate_episode",
+      "grain": "source record",
+      "role": "quality",
+      "definition": "Same name key label and dates as another record",
+      "units": "boolean",
+      "timing_status": "source audit",
+      "limitation": "Different contexts require adjudication"
+    }
+  },
+  {
+    "catalog_key": "european_football:same_day_player_records",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "same_day_player_records",
+      "grain": "source record",
+      "role": "quality",
+      "definition": "Multiple non-exact-duplicate records at one player onset date",
+      "units": "boolean",
+      "timing_status": "source audit",
+      "limitation": "No within-day ordering is established"
+    }
+  },
+  {
+    "catalog_key": "european_football:previous_injury_date",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "previous_injury_date",
+      "grain": "source record",
+      "role": "history",
+      "definition": "Latest strictly earlier recorded onset",
+      "units": "date",
+      "timing_status": "strictly earlier starts",
+      "limitation": "No source knowledge timestamp"
+    }
+  },
+  {
+    "catalog_key": "european_football:previous_injury_end",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "previous_injury_end",
+      "grain": "source record",
+      "role": "history",
+      "definition": "End of unique latest-start earlier record",
+      "units": "date",
+      "timing_status": "retrospective only",
+      "limitation": "May be future known relative to current onset"
+    }
+  },
+  {
+    "catalog_key": "european_football:days_since_previous_injury",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "days_since_previous_injury",
+      "grain": "source record",
+      "role": "history",
+      "definition": "Current start minus previous injury end",
+      "units": "days",
+      "timing_status": "retrospective only",
+      "limitation": "Negative overlap and ties remain unavailable"
+    }
+  },
+  {
+    "catalog_key": "european_football:previous_injury_count",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "previous_injury_count",
+      "grain": "source record",
+      "role": "history",
+      "definition": "Count of strictly earlier recorded starts",
+      "units": "records",
+      "timing_status": "strictly earlier starts",
+      "limitation": "Left truncated and affected by repeated records"
+    }
+  },
+  {
+    "catalog_key": "european_football:previous_same_injury_count",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "previous_same_injury_count",
+      "grain": "source record",
+      "role": "history",
+      "definition": "Count of earlier starts with matching normalized raw label",
+      "units": "records",
+      "timing_status": "strictly earlier starts",
+      "limitation": "No clinical reinjury inference"
+    }
+  },
+  {
+    "catalog_key": "european_football:same_label_after_recorded_end_count",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "same_label_after_recorded_end_count",
+      "grain": "source record",
+      "role": "history",
+      "definition": "Earlier same-label valid intervals ending before current onset",
+      "units": "records",
+      "timing_status": "retrospective only",
+      "limitation": "Endpoint and source knowledge require audit"
+    }
+  },
+  {
+    "catalog_key": "european_football:overlaps_any_prior_record",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "overlaps_any_prior_record",
+      "grain": "source record",
+      "role": "history",
+      "definition": "Current onset is within any earlier valid inclusive interval",
+      "units": "boolean",
+      "timing_status": "retrospective only",
+      "limitation": "Recorded intervals do not confirm health status"
+    }
+  },
+  {
+    "catalog_key": "european_football:career_injury_count_in_dataset",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "career_injury_count_in_dataset",
+      "grain": "recorded name",
+      "role": "full history",
+      "definition": "Retained records across full file",
+      "units": "records",
+      "timing_status": "full history descriptive",
+      "limitation": "Future leakage if assigned to earlier events"
+    }
+  },
+  {
+    "catalog_key": "european_football:total_days_out",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "total_days_out",
+      "grain": "group or recorded name",
+      "role": "burden",
+      "definition": "Sum of valid reported episode durations",
+      "units": "episode days",
+      "timing_status": "full history descriptive",
+      "limitation": "Can double count repeated or overlapping days"
+    }
+  },
+  {
+    "catalog_key": "european_football:total_games_missed",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "total_games_missed",
+      "grain": "group or recorded name",
+      "role": "burden",
+      "definition": "Sum of valid reported missed matches",
+      "units": "match losses",
+      "timing_status": "full history descriptive",
+      "limitation": "Can double count matches"
+    }
+  },
+  {
+    "catalog_key": "european_football:median_days_out",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "median_days_out",
+      "grain": "group or recorded name",
+      "role": "severity",
+      "definition": "Median valid reported duration",
+      "units": "days",
+      "timing_status": "full history descriptive",
+      "limitation": "Sample size and injury mix matter"
+    }
+  },
+  {
+    "catalog_key": "european_football:max_days_out",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "max_days_out",
+      "grain": "group or recorded name",
+      "role": "severity",
+      "definition": "Maximum valid reported duration",
+      "units": "days",
+      "timing_status": "full history descriptive",
+      "limitation": "Extreme record requires review"
+    }
+  },
+  {
+    "catalog_key": "european_football:valid_days_count",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "valid_days_count",
+      "grain": "group or recorded name",
+      "role": "coverage",
+      "definition": "Count of nonmissing valid reported durations",
+      "units": "records",
+      "timing_status": "descriptive",
+      "limitation": "Metric-specific sample size"
+    }
+  },
+  {
+    "catalog_key": "european_football:valid_games_count",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "valid_games_count",
+      "grain": "group or recorded name",
+      "role": "coverage",
+      "definition": "Count of nonmissing valid reported games",
+      "units": "records",
+      "timing_status": "descriptive",
+      "limitation": "Metric-specific sample size"
+    }
+  },
+  {
+    "catalog_key": "european_football:recorded_interval_union_days",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "recorded_interval_union_days",
+      "grain": "recorded name",
+      "role": "descriptive burden",
+      "definition": "Unique dates in valid inclusive recorded intervals",
+      "units": "recorded dates",
+      "timing_status": "full history descriptive",
+      "limitation": "No observation denominator or complete absence guarantee"
+    }
+  },
+  {
+    "catalog_key": "european_football:repeated_same_label_events",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "repeated_same_label_events",
+      "grain": "recorded name",
+      "role": "recurrence summary",
+      "definition": "Records with at least one earlier same-label onset",
+      "units": "records",
+      "timing_status": "full history descriptive",
+      "limitation": "Source records can repeat an episode"
+    }
+  },
+  {
+    "catalog_key": "european_football:same_label_after_recorded_end_events",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "same_label_after_recorded_end_events",
+      "grain": "recorded name",
+      "role": "recurrence summary",
+      "definition": "Records with at least one earlier same-label ended interval",
+      "units": "records",
+      "timing_status": "full history descriptive",
+      "limitation": "Not clinically confirmed reinjury"
+    }
+  },
+  {
+    "catalog_key": "european_football:injury_group_draft",
+    "source_id": "european_football",
+    "source_file": "European_Football_Injuries/handoff/feature_catalog.csv",
+    "original_definition": {
+      "feature": "injury_group_draft",
+      "grain": "raw label",
+      "role": "draft taxonomy",
+      "definition": "Conservative explicit-wording proposed tissue or absence group",
+      "units": "category",
+      "timing_status": "draft requires review",
+      "limitation": "Not used for primary burden or recurrence"
+    }
+  }
+]

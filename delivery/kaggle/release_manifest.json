@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "files": {
+    "atlas_summary.json": "2c3899cf1dcbe4cc7f37ae213c12aae63950568172be3ffbf88edeb43b408a51",
+    "data_dictionary.csv": "5e538ce0a8eddf9a9d8c907676f5f753f1775fc7692ac48a99c921123a97e891",
+    "DATA_LICENSE.md": "4f4b575992d90e477749900e9f0dd75ab3a7c33d3010a136eb85ce854dfbe227",
+    "discussion.md": "966e845dea1e2eb283a47c12f04d210af47b42ea09fe13cfe49de259d8317339",
+    "discussion_es.md": "6bf9e88156ff34049eed7b20f166a78f0e3076ef0a67db4dd50970b2306196a3",
+    "domain_matrix.csv": "4c30de90ab15ad4a818a71dbb5f01c2450cfceca92ba715436924489fc7d3b6e",
+    "evidence_atlas_audit.ipynb": "c41dbc9fc58dd45da00227e80296c1eeef06367c7f69a5e0cfe107f7b0788bb1",
+    "feature_catalog.csv": "44f3e7949be6ea219451b08f5aeb2b703f24a5f7d6387b6174ed90fcb6fb04f9",
+    "football_burden.csv": "8f8b8949198978f30d32246828adc0a995120796ff4ee99eba6f4c9cc28aa41a",
+    "football_duplicate_sensitivity.csv": "61318b6b16da6b810fc24476ea9eadfac74fdf95b21d11c9f3a676b160e891de",
+    "literature_search.md": "89573d4561d4f015847b5d0be8af305522e1286a9a50650816fa4f24a1099b3b",
+    "methodology.md": "b045bbfaeb17b11eef584d14dec47cd0de6dc51e9ab2cb2ee86d3be1bf4e3f40",
+    "outcome_registry.csv": "dfb1ccb3fe37ea227826f74f7548333f30824a7a65312b908f1174f4cb774fb3",
+    "README.md": "3f9192ff222be44611591985cf330a884a7aa32b1bca1c6650015724e336c894",
+    "references.json": "23afbde73b1c56f9c9e07c6933f68b59b47eaba93b680758316e042553d9c321",
+    "research_direction.md": "8e0bdb605246cc4616ec73f7bc698f392cea253d7140b181cac8bd317f853126",
+    "ric_pilot_descriptives.csv": "50885a35a8b9868e22f2a4cc827cfe919d323b52c2d09dc33e2642239cfbe072",
+    "runners_primary_validation.csv": "7795db01533853ceec414a31e5143188b84cd8825947f042eb8277908b3e4b7c",
+    "source_manifest.json": "1c46d040112a6f81d69137518ccff8352d57131d3ccede26097a37a635e0ba17",
+    "source_metrics.csv": "5edfe8377f60712343b4025064bc943aafefac618ec1aef83ba9b00c885f337b",
+    "source_snapshots.zip": "4f06e8d09c33b64152572e4b8c095cccb7ec3c48b8b3ddc16e0ce6c1d43f0862"
+  }
+}

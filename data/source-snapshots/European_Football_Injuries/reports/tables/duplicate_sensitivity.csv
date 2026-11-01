@@ -1,0 +1,3 @@
+cohort,record_count,total_days_out,total_games_missed,players_with_multiple_records,repeated_same_label_events
+source_records_exact_deduplicated,15603,563314.0,85928.0,2795,2207
+candidate_episode_collapsed_sensitivity,14611,532422.0,81226.0,2748,2062

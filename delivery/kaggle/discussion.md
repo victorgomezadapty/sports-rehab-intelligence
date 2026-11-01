@@ -1,0 +1,13 @@
+# Three studies, one research direction
+
+Sports Rehab Intelligence connects movement, training and recorded injury consequences at the level of evidence and metadata. It does not establish a causal pathway across three separate populations.
+
+Ferber et al.'s RIC descriptor documents the source population and treadmill protocol (https://doi.org/10.1038/s41597-024-04011-7). The local analysis contains running metadata for 1,402 people and a selected 30-person technical pilot. Stored scalars and structural checks do not validate events or cycles. Protocol, running speed and population differences require explicit review before measurement harmonisation. Figshare v1 is preserved (https://doi.org/10.25452/figshare.plus.24255795.v1).
+
+Competitive Runners studies 74 athletes and 42,766 selected Day events. The original design (https://doi.org/10.1123/ijspp.2020-0518), its erratum (https://doi.org/10.1123/ijspp.2024-0251) and corrected source documentation must be read together. Time and athlete separation examine generalisation, but do not remove control selection based on future fitness. Primary unseen-athlete/future AP is about 0.0200 against a 0.0161 positive fraction in that selected test. It does not establish prospective incidence or clinical prevention.
+
+Football contains 15,603 recorded absence events. The 14,611-record candidate view is a repeated-interval sensitivity, not clinical episode adjudication. Frequency, severity and burden answer different questions. IOC/STROBE-SIIS (https://doi.org/10.1136/bjsports-2019-101969) and the burden methods editorial (https://doi.org/10.1136/bjsports-2017-098160) support those distinctions; they do not validate the upstream Kaggle records. Inclusive recorded intervals are not automatically IOC-defined time loss, clinical recovery or true availability.
+
+The 104 catalogue entries are source-specific definitions, not a common predictor set. The authored domain matrix exposes provisional measurements, non-equivalent constructs and missing modalities. RIC injury-history duration, runners session-preventing labels and football absence intervals cannot silently share one endpoint.
+
+This release contributes a traceable compatibility atlas, reusable contracts and a linked-cohort research specification. Empirical multimodal associations require measurements in the same people with verified identity, timing and clinical endpoints. This is a focused narrative discussion, not a systematic review or claim of worldwide novelty. Full reference metadata are provided in `references.json`; the Spanish discussion contains the numbered bibliography.

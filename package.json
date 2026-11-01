@@ -1,0 +1,13 @@
+{
+  "name": "sports-rehab-intelligence",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An evidence atlas connecting three independent sports rehabilitation studies",
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "dev": "node scripts/serve-site.mjs",
+    "test": "node --test tests/web.test.mjs"
+  },
+  "engines": {"node": ">=20"}
+}

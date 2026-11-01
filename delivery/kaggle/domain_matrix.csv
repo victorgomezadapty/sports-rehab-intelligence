@@ -1,0 +1,28 @@
+domain_id,domain,source_id,status,interpretation
+running_kinematics,Running kinematics,ric,provisional,13 variables per side in the RIC pilot; events and cycles pending.
+running_kinematics,Running kinematics,competitive_runners,not_available,13 variables per side in the RIC pilot; events and cycles pending.
+running_kinematics,Running kinematics,european_football,not_available,13 variables per side in the RIC pilot; events and cycles pending.
+training_history,Training history,ric,not_available,Histories preceding selected events; not a complete continuous diary.
+training_history,Training history,competitive_runners,available,Histories preceding selected events; not a complete continuous diary.
+training_history,Training history,european_football,not_available,Histories preceding selected events; not a complete continuous diary.
+subjective_response,Subjective response,ric,not_available,Source scales and rest sentinels; do not automatically convert to Borg.
+subjective_response,Subjective response,competitive_runners,available,Source scales and rest sentinels; do not automatically convert to Borg.
+subjective_response,Subjective response,european_football,not_available,Source scales and rest sentinels; do not automatically convert to Borg.
+contemporaneous_status,Contemporaneous status,ric,available,"Metadata status, session label and absence record have distinct definitions."
+contemporaneous_status,Contemporaneous status,competitive_runners,different_construct,"Metadata status, session label and absence record have distinct definitions."
+contemporaneous_status,Contemporaneous status,european_football,different_construct,"Metadata status, session label and absence record have distinct definitions."
+absence_duration,Absence duration,ric,different_construct,RIC injury-history duration is not equivalent to football inclusive absence intervals.
+absence_duration,Absence duration,competitive_runners,not_available,RIC injury-history duration is not equivalent to football inclusive absence intervals.
+absence_duration,Absence duration,european_football,available,RIC injury-history duration is not equivalent to football inclusive absence intervals.
+match_loss,Match loss,ric,not_available,Reported losses summed per record; not an availability percentage.
+match_loss,Match loss,competitive_runners,not_available,Reported losses summed per record; not an availability percentage.
+match_loss,Match loss,european_football,available,Reported losses summed per record; not an availability percentage.
+complete_exposure,Complete eligible exposure,ric,not_available,None of these releases establishes a complete comparable denominator for prospective incidence.
+complete_exposure,Complete eligible exposure,competitive_runners,not_available,None of these releases establishes a complete comparable denominator for prospective incidence.
+complete_exposure,Complete eligible exposure,european_football,not_available,None of these releases establishes a complete comparable denominator for prospective incidence.
+verified_return,Verified clinical return,ric,not_available,"Recorded end, a new label and clinical recovery are not equivalent."
+verified_return,Verified clinical return,competitive_runners,not_available,"Recorded end, a new label and clinical recovery are not equivalent."
+verified_return,Verified clinical return,european_football,not_available,"Recorded end, a new label and clinical recovery are not equivalent."
+multimodal_followup,Linked multimodal follow-up,ric,not_available,There is no verified participant crosswalk across the three sources.
+multimodal_followup,Linked multimodal follow-up,competitive_runners,not_available,There is no verified participant crosswalk across the three sources.
+multimodal_followup,Linked multimodal follow-up,european_football,not_available,There is no verified participant crosswalk across the three sources.

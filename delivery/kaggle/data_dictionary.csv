@@ -1,0 +1,74 @@
+file,column,definition
+feature_catalog.csv,catalog_key,Source-prefixed variable-definition key; not a combined predictor
+feature_catalog.csv,source_id,Namespace of the independent source cohort; not an athlete identifier
+feature_catalog.csv,original_variable,Source-specific original variable; see original_definition_json and outcome registry
+feature_catalog.csv,source_domain_or_role,Source-specific source domain or role; see original_definition_json and outcome registry
+feature_catalog.csv,definition,Source-specific definition; see original_definition_json and outcome registry
+feature_catalog.csv,units,Original source units; no cross-source conversion applied
+feature_catalog.csv,observation_context,Source-specific observation context; see original_definition_json and outcome registry
+feature_catalog.csv,timing_or_verification,Source-specific timing or verification; see original_definition_json and outcome registry
+feature_catalog.csv,limitations,Source-specific limitations; see original_definition_json and outcome registry
+feature_catalog.csv,source_file,Source-specific source file; see original_definition_json and outcome registry
+feature_catalog.csv,original_definition_json,Lossless original catalogue metadata for audit
+source_metrics.csv,source_id,Namespace of the independent source cohort; not an athlete identifier
+source_metrics.csv,metric,Source-specific metric; see original_definition_json and outcome registry
+source_metrics.csv,value,Source-specific aggregate value; metric and observation_unit govern interpretation
+source_metrics.csv,observation_unit,Source-specific observation unit; see original_definition_json and outcome registry
+source_metrics.csv,limitation,Source-specific limitation; see original_definition_json and outcome registry
+outcome_registry.csv,source_id,Namespace of the independent source cohort; not an athlete identifier
+outcome_registry.csv,project,Source-specific project; see original_definition_json and outcome registry
+outcome_registry.csv,observation_unit,Source-specific observation unit; see original_definition_json and outcome registry
+outcome_registry.csv,outcome,Source-specific outcome; see original_definition_json and outcome registry
+outcome_registry.csv,time_basis,Source-specific time basis; see original_definition_json and outcome registry
+outcome_registry.csv,limitation,Source-specific limitation; see original_definition_json and outcome registry
+outcome_registry.csv,licence,Source-specific licence; see original_definition_json and outcome registry
+domain_matrix.csv,domain_id,Source-specific domain id; see original_definition_json and outcome registry
+domain_matrix.csv,domain,Source-specific domain; see original_definition_json and outcome registry
+domain_matrix.csv,source_id,Namespace of the independent source cohort; not an athlete identifier
+domain_matrix.csv,status,"Authored mapping: available, provisional, different_construct or not_available"
+domain_matrix.csv,interpretation,Source-specific interpretation; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,feature,Source-specific feature; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,domain,Source-specific domain; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,unit,Source-specific unit; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,phase,Source-specific phase; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,side,Source-specific side; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,n,Source-specific n; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,median,Source-specific median; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,q1,Source-specific q1; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,q3,Source-specific q3; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,minimum,Source-specific minimum; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,maximum,Source-specific maximum; see original_definition_json and outcome registry
+ric_pilot_descriptives.csv,source,Source-specific source; see original_definition_json and outcome registry
+runners_primary_validation.csv,Validation,Source-specific Validation; see original_definition_json and outcome registry
+runners_primary_validation.csv,Athletes,Source-specific Athletes; see original_definition_json and outcome registry
+runners_primary_validation.csv,Rows,Source-specific Rows; see original_definition_json and outcome registry
+runners_primary_validation.csv,Labels,Source-specific Labels; see original_definition_json and outcome registry
+runners_primary_validation.csv,Label fraction,Source-specific Label fraction; see original_definition_json and outcome registry
+runners_primary_validation.csv,Pooled AP,Source-specific Pooled AP; see original_definition_json and outcome registry
+runners_primary_validation.csv,Mean fold AP,Source-specific Mean fold AP; see original_definition_json and outcome registry
+runners_primary_validation.csv,AP CI low,Source-specific AP CI low; see original_definition_json and outcome registry
+runners_primary_validation.csv,AP CI high,Source-specific AP CI high; see original_definition_json and outcome registry
+runners_primary_validation.csv,ROC-AUC,Source-specific ROC-AUC; see original_definition_json and outcome registry
+runners_primary_validation.csv,Brier,Source-specific Brier; see original_definition_json and outcome registry
+football_duplicate_sensitivity.csv,cohort,Source-specific cohort; see original_definition_json and outcome registry
+football_duplicate_sensitivity.csv,record_count,Source-specific record count; see original_definition_json and outcome registry
+football_duplicate_sensitivity.csv,total_days_out,Source-specific total days out; see original_definition_json and outcome registry
+football_duplicate_sensitivity.csv,total_games_missed,Source-specific total games missed; see original_definition_json and outcome registry
+football_duplicate_sensitivity.csv,players_with_multiple_records,Source-specific players with multiple records; see original_definition_json and outcome registry
+football_duplicate_sensitivity.csv,repeated_same_label_events,Source-specific repeated same label events; see original_definition_json and outcome registry
+football_burden.csv,injury_type_raw,Source-specific injury type raw; see original_definition_json and outcome registry
+football_burden.csv,injury_count,Source-specific injury count; see original_definition_json and outcome registry
+football_burden.csv,unique_recorded_names,Source-specific unique recorded names; see original_definition_json and outcome registry
+football_burden.csv,valid_days_count,Source-specific valid days count; see original_definition_json and outcome registry
+football_burden.csv,median_days_out,Source-specific median days out; see original_definition_json and outcome registry
+football_burden.csv,mean_days_out,Source-specific mean days out; see original_definition_json and outcome registry
+football_burden.csv,max_days_out,Source-specific max days out; see original_definition_json and outcome registry
+football_burden.csv,valid_games_count,Source-specific valid games count; see original_definition_json and outcome registry
+football_burden.csv,median_games_missed,Source-specific median games missed; see original_definition_json and outcome registry
+football_burden.csv,total_days_out,Source-specific total days out; see original_definition_json and outcome registry
+football_burden.csv,total_games_missed,Source-specific total games missed; see original_definition_json and outcome registry
+football_burden.csv,p25_days_out,Source-specific p25 days out; see original_definition_json and outcome registry
+football_burden.csv,p75_days_out,Source-specific p75 days out; see original_definition_json and outcome registry
+football_burden.csv,p90_days_out,Source-specific p90 days out; see original_definition_json and outcome registry
+football_burden.csv,p95_days_out,Source-specific p95 days out; see original_definition_json and outcome registry
+football_burden.csv,iqr_days_out,Source-specific iqr days out; see original_definition_json and outcome registry

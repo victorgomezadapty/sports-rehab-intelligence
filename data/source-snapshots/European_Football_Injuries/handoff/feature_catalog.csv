@@ -1,0 +1,43 @@
+feature,grain,role,definition,units,timing_status,limitation
+event_id,source record,lineage,Source CSV row-based identifier,identifier,source lineage,Stable only within this source version
+source_row,source record,lineage,CSV line number with header on line 1,integer,source lineage,Not a verified event ID
+player_id,recorded name,identity,Hash of exact NFC trimmed name,identifier,unverified,Homonyms and spelling variants unresolved
+player_name,source record,identity,Recorded player name,text,unverified,No date of birth or stable upstream ID
+club,source record,context,Club label in the source,text,onset timing unverified,May repeat episodes across clubs
+league,source record,context,League label in the source,text,onset timing unverified,No population exposure denominator
+season,source record,context,Source season label,text,context,Not actual allocation of days across seasons
+position,source record,context,Detailed recorded playing position,text,onset timing unverified,Changing position and role not tracked
+age_recorded,source record,context,Parsed source age,years,onset timing unverified,Not independently verified age at onset
+age_group,source record,descriptive,Recorded age bands <=20 / 21-25 / 26-30 / 31-35 / 36+,category,onset timing unverified,Descriptive bands without causal meaning
+injury_type_raw,source record,context,Trimmed source absence label with case retained,text,diagnosis timing unverified,Includes illness and non-injury absence
+injury_label_key,source record,recurrence key,Casefold and whitespace normalization only,text,diagnosis timing unverified,Not anatomical identity or clinical reinjury
+injury_start,source record,date,Parsed onset using explicit US or ISO format,date,recording time unverified,Clinical onset not independently confirmed
+injury_end,source record,outcome,Parsed recorded end,date,post onset,Does not establish medical clearance or first match return
+reported_days_out,source record,outcome,Numeric conversion of original Days,days,post onset,Original value retained without overwriting
+calculated_days_out,source record,audit,Recorded end minus recorded start,exclusive days,post onset,Keep separate from reported inclusive duration
+duration_difference,source record,audit,Reported minus calculated days,days,post onset,Convention diagnostic
+days_out,source record,analysis outcome,Reported nonnegative integral days otherwise missing,days,post onset,Episode duration not forecast
+games_missed,source record,outcome,Numeric original missed matches,matches,post onset,Competition and eligibility coverage unknown
+games_missed_valid,source record,analysis outcome,Reported nonnegative integral matches otherwise missing,matches,post onset,Overlaps can repeat matches
+injury_month,source record,calendar,Month of parsed recorded onset,YYYY-MM,recording time unverified,Entire episode burden assigned to onset month
+exact_duplicate,source record,quality,Whole source row duplicates an earlier row,boolean,source audit,Only automatic primary record exclusion
+potential_duplicate_episode,source record,quality,Same name key label and dates as another record,boolean,source audit,Different contexts require adjudication
+same_day_player_records,source record,quality,Multiple non-exact-duplicate records at one player onset date,boolean,source audit,No within-day ordering is established
+previous_injury_date,source record,history,Latest strictly earlier recorded onset,date,strictly earlier starts,No source knowledge timestamp
+previous_injury_end,source record,history,End of unique latest-start earlier record,date,retrospective only,May be future known relative to current onset
+days_since_previous_injury,source record,history,Current start minus previous injury end,days,retrospective only,Negative overlap and ties remain unavailable
+previous_injury_count,source record,history,Count of strictly earlier recorded starts,records,strictly earlier starts,Left truncated and affected by repeated records
+previous_same_injury_count,source record,history,Count of earlier starts with matching normalized raw label,records,strictly earlier starts,No clinical reinjury inference
+same_label_after_recorded_end_count,source record,history,Earlier same-label valid intervals ending before current onset,records,retrospective only,Endpoint and source knowledge require audit
+overlaps_any_prior_record,source record,history,Current onset is within any earlier valid inclusive interval,boolean,retrospective only,Recorded intervals do not confirm health status
+career_injury_count_in_dataset,recorded name,full history,Retained records across full file,records,full history descriptive,Future leakage if assigned to earlier events
+total_days_out,group or recorded name,burden,Sum of valid reported episode durations,episode days,full history descriptive,Can double count repeated or overlapping days
+total_games_missed,group or recorded name,burden,Sum of valid reported missed matches,match losses,full history descriptive,Can double count matches
+median_days_out,group or recorded name,severity,Median valid reported duration,days,full history descriptive,Sample size and injury mix matter
+max_days_out,group or recorded name,severity,Maximum valid reported duration,days,full history descriptive,Extreme record requires review
+valid_days_count,group or recorded name,coverage,Count of nonmissing valid reported durations,records,descriptive,Metric-specific sample size
+valid_games_count,group or recorded name,coverage,Count of nonmissing valid reported games,records,descriptive,Metric-specific sample size
+recorded_interval_union_days,recorded name,descriptive burden,Unique dates in valid inclusive recorded intervals,recorded dates,full history descriptive,No observation denominator or complete absence guarantee
+repeated_same_label_events,recorded name,recurrence summary,Records with at least one earlier same-label onset,records,full history descriptive,Source records can repeat an episode
+same_label_after_recorded_end_events,recorded name,recurrence summary,Records with at least one earlier same-label ended interval,records,full history descriptive,Not clinically confirmed reinjury
+injury_group_draft,raw label,draft taxonomy,Conservative explicit-wording proposed tissue or absence group,category,draft requires review,Not used for primary burden or recurrence

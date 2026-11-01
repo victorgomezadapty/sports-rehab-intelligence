@@ -1,0 +1,132 @@
+{
+  "schema_version": "0.1.0",
+  "scope": "Local aggregate inventory; existing source analyses are not rerun",
+  "sources": [
+    {
+      "source_id": "ric",
+      "project": "Running Injury Clinic",
+      "project_readme": "Running_Injury_Clinic/README.md",
+      "summary_files": [
+        "Running_Injury_Clinic/reports/tables/cohort_counts.json",
+        "Running_Injury_Clinic/reports/tables/pilot_summary.json"
+      ],
+      "observation_unit": "Running metadata record; selected trial in technical pilot",
+      "outcome": "Current recorded injury status, not future injury",
+      "time_basis": "Recorded timestamps; not a verified clinical follow-up schedule",
+      "domains": [
+        "running biomechanics",
+        "current injury metadata"
+      ],
+      "licence": "Upstream dataset CC BY 4.0; preserve project attribution notices",
+      "metrics": {
+        "running_metadata_participants": 1402,
+        "running_metadata_records": 1832,
+        "pilot_participants": 30,
+        "pilot_features_per_side": 13,
+        "pilot_finite_source_values": 780,
+        "independently_validated_events_trials": 0
+      },
+      "limitation": "Pilot source scalars; event/cycle validation pending in the reviewed snapshot",
+      "feature_catalog": "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+      "feature_key": "feature",
+      "catalog_definition_count": 13
+    },
+    {
+      "source_id": "competitive_runners",
+      "project": "Competitive Runners",
+      "project_readme": "Competitive_Runners/competitive-runners-injury-risk/README.md",
+      "summary_files": [
+        "Competitive_Runners/competitive-runners-injury-risk/reports/tables/audit_summary.json"
+      ],
+      "observation_unit": "Selected event preceded by training history; Day primary",
+      "outcome": "Retained injury label: prevented completion of a scheduled session",
+      "time_basis": "Relative days; unsuffixed Day lag E-7, .6 lag E-1",
+      "domains": [
+        "training history",
+        "subjective response",
+        "selected injury labels"
+      ],
+      "licence": "Primary dataset and dedicated tabular exports CC0; see source rights inventory",
+      "metrics": {
+        "day_athletes": 74,
+        "day_selected_events": 42766,
+        "day_positive_labels": 583,
+        "matched_day_week_events": 42680
+      },
+      "limitation": "Selected sample; future-fitness control selection; label fraction is not incidence",
+      "feature_catalog": "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+      "feature_key": "feature_name",
+      "catalog_definition_count": 49
+    },
+    {
+      "source_id": "european_football",
+      "project": "European Football Injuries",
+      "project_readme": "European_Football_Injuries/README.md",
+      "summary_files": [
+        "European_Football_Injuries/reports/dataset_summary.json"
+      ],
+      "observation_unit": "Recorded absence event; candidate collapsing is sensitivity only",
+      "outcome": "Reported absence duration and missed matches; not verified clinical return",
+      "time_basis": "Recorded start/end dates and source seasons",
+      "domains": [
+        "recorded absence",
+        "reported duration",
+        "reported match loss"
+      ],
+      "licence": "Derived data CC BY-SA 4.0; preserve source attribution and transformations",
+      "metrics": {
+        "absence_records": 15603,
+        "distinct_recorded_names_not_verified_people": 4081,
+        "candidate_collapsed_records_sensitivity": 14611,
+        "reported_episode_days_sum": 563314.0,
+        "reported_match_losses_sum": 85928.0
+      },
+      "limitation": "Unverified identity/endpoints; repeated intervals; no eligible-exposure denominator",
+      "feature_catalog": "European_Football_Injuries/handoff/feature_catalog.csv",
+      "feature_key": "feature",
+      "catalog_definition_count": 42
+    }
+  ],
+  "cross_source_linkage": "No verified participant crosswalk identified in reviewed project documentation",
+  "cross_source_effect_estimate": null,
+  "pooled_population_count": null,
+  "pooled_injury_count": null,
+  "integration_level": "Source-specific summaries and variable definitions",
+  "provenance": {
+    "Running_Injury_Clinic/reports/tables/cohort_counts.json": {
+      "sha256": "cdebdbfca13697aba947a856177d69f2ce3f91d1654a9523942173a195c52125",
+      "bytes": 829,
+      "role": "aggregate summary"
+    },
+    "Running_Injury_Clinic/reports/tables/pilot_summary.json": {
+      "sha256": "9014563995e0084197fca9dc32ac98300a0e8a96cdada0384d184ed001d96611",
+      "bytes": 1393,
+      "role": "aggregate summary"
+    },
+    "Competitive_Runners/competitive-runners-injury-risk/reports/tables/audit_summary.json": {
+      "sha256": "a7bc7ff71f515ee5674ac12a3f3897c3397df28b3e1510415a7eca1c4857413e",
+      "bytes": 3312,
+      "role": "aggregate summary"
+    },
+    "European_Football_Injuries/reports/dataset_summary.json": {
+      "sha256": "09b079c62ea15eb4cb2400182f2adba52bff8c643a79d614cbfdfe26d9856b33",
+      "bytes": 1329,
+      "role": "aggregate summary"
+    },
+    "Running_Injury_Clinic/handoff/pilot_feature_catalog.csv": {
+      "sha256": "c46ca5d9c21d455ff38264f488def8c1a2603cb9192345f3936961b63b3e618e",
+      "bytes": 7428,
+      "role": "variable definitions"
+    },
+    "Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv": {
+      "sha256": "18b83a4f3f860a223eea28fc189ce8b3ad669c7fa1613e32df0ec24bb1d1094b",
+      "bytes": 14089,
+      "role": "variable definitions"
+    },
+    "European_Football_Injuries/handoff/feature_catalog.csv": {
+      "sha256": "71d28baa685f79073f4c79b5bd5fef9b27cc4affe22bbc66a6c7909a9d21bce0",
+      "bytes": 6327,
+      "role": "variable definitions"
+    }
+  }
+}

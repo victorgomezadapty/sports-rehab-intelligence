@@ -1,0 +1,133 @@
+{
+  "day": {
+    "representation": "day",
+    "rows": 42766,
+    "columns": 73,
+    "athletes": 74,
+    "injury_rows": 583,
+    "injury_prevalence": 0.013632324743955478,
+    "athletes_with_injury": 63,
+    "first_relative_day": 0,
+    "last_relative_day": 2673,
+    "blank_cells": 0,
+    "duplicate_keys": 0,
+    "consecutive_injury_pairs": 0,
+    "injury_interval_days": {
+      "count": 520.0,
+      "mean": 109.4076923076923,
+      "std": 108.96186928488072,
+      "min": 22.0,
+      "25%": 47.0,
+      "50%": 77.0,
+      "75%": 130.25,
+      "max": 877.0
+    },
+    "observations_per_athlete": {
+      "count": 74.0,
+      "mean": 577.918918918919,
+      "std": 425.929274364253,
+      "min": 43.0,
+      "25%": 269.0,
+      "50%": 426.5,
+      "75%": 753.0,
+      "max": 1791.0
+    },
+    "selected_event_span_days": {
+      "count": 74.0,
+      "mean": 1059.1216216216217,
+      "std": 807.5906998165661,
+      "min": 43.0,
+      "25%": 521.5,
+      "50%": 801.0,
+      "75%": 1561.5,
+      "max": 2653.0
+    },
+    "total_unselected_days_within_athlete_spans": 35609,
+    "consecutive_selected_event_pairs": 41700
+  },
+  "week": {
+    "representation": "week",
+    "rows": 42798,
+    "columns": 72,
+    "athletes": 74,
+    "injury_rows": 575,
+    "injury_prevalence": 0.01343520725267536,
+    "athletes_with_injury": 61,
+    "first_relative_day": 0,
+    "last_relative_day": 2673,
+    "blank_cells": 0,
+    "duplicate_keys": 0,
+    "consecutive_injury_pairs": 0,
+    "injury_interval_days": {
+      "count": 514.0,
+      "mean": 110.14591439688716,
+      "std": 109.59155123541089,
+      "min": 22.0,
+      "25%": 47.0,
+      "50%": 78.5,
+      "75%": 130.75,
+      "max": 877.0
+    },
+    "observations_per_athlete": {
+      "count": 74.0,
+      "mean": 578.3513513513514,
+      "std": 426.8664874979456,
+      "min": 43.0,
+      "25%": 269.0,
+      "50%": 426.5,
+      "75%": 753.0,
+      "max": 1791.0
+    },
+    "selected_event_span_days": {
+      "count": 74.0,
+      "mean": 1055.7162162162163,
+      "std": 808.7049434044884,
+      "min": 43.0,
+      "25%": 521.5,
+      "50%": 801.0,
+      "75%": 1561.5,
+      "max": 2653.0
+    },
+    "total_unselected_days_within_athlete_spans": 35325,
+    "consecutive_selected_event_pairs": 41751
+  },
+  "cross_representation": {
+    "matched_keys": 42680,
+    "day_only": 86,
+    "week_only": 118,
+    "label_disagreements": 0
+  },
+  "history": {
+    "window_cells_rows": 299362,
+    "unique_athlete_training_days": 49162,
+    "conflicting_athlete_days": 0,
+    "earliest_training_relative_day": -7,
+    "latest_training_relative_day": 2672,
+    "rest_days_reconstructed": 12860,
+    "sentinel_cells_in_event_windows": 241047,
+    "all_rest_7d_event_windows": 2282,
+    "injury_rows_after_all_rest_7d": 5,
+    "rows_for_source_review": 170
+  },
+  "example_athletes": [
+    55,
+    13,
+    67,
+    38,
+    32
+  ],
+  "environment": {
+    "python": "3.14.6",
+    "packages": {
+      "pandas": "2.3.3",
+      "numpy": "2.5.2",
+      "matplotlib": "3.11.2",
+      "scipy": "1.18.1",
+      "requests": "2.34.2",
+      "nbformat": "5.10.4",
+      "nbclient": "0.11.0",
+      "ipykernel": "7.3.0",
+      "pytest": "9.1.1"
+    }
+  }
+}

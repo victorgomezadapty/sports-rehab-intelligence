@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ric_descriptor",
+    "authors": "Ferber R, Brett K, Fukuchi R, Hettinga B, Osis S",
+    "year": 2024,
+    "title": "A Biomechanical Dataset of 1,798 Healthy and Injured Subjects During Treadmill Walking and Running",
+    "url": "https://doi.org/10.1038/s41597-024-04011-7",
+    "type": "Data descriptor",
+    "use_es": "Población, protocolo y cautelas al combinar mediciones biomecánicas.",
+    "use_en": "Population, protocol and caution when combining biomechanical measurements."
+  },
+  {
+    "id": "ric_data",
+    "authors": "Ferber R, Brett K, Fukuchi R, Hettinga B, Osis S",
+    "year": 2023,
+    "title": "Running Injury Clinic Kinematic Dataset, version 1",
+    "url": "https://doi.org/10.25452/figshare.plus.24255795.v1",
+    "type": "Original dataset · CC BY 4.0",
+    "use_es": "Versión utilizada por el proyecto RIC; no se sustituye por una versión posterior.",
+    "use_en": "Version used by the RIC project; not replaced with a later version."
+  },
+  {
+    "id": "runners_data",
+    "authors": "Lövdal S, den Hartigh RJR, Azzopardi G",
+    "year": 2021,
+    "title": "Replication Data for: Injury Prediction In Competitive Runners With Machine Learning",
+    "url": "https://doi.org/10.34894/UWU9PV",
+    "type": "Original dataset · v2.0 · CC0",
+    "use_es": "Historias Day/Week y documentación corregida de los lags.",
+    "use_en": "Day/Week histories and corrected lag documentation."
+  },
+  {
+    "id": "runners_paper",
+    "authors": "Lövdal S, den Hartigh RJR, Azzopardi G",
+    "year": 2021,
+    "title": "Injury Prediction in Competitive Runners With Machine Learning",
+    "url": "https://doi.org/10.1123/ijspp.2020-0518",
+    "type": "Original research",
+    "use_es": "Diseño y selección de eventos del estudio original; el análisis integrador no reproduce su modelo.",
+    "use_en": "Original study design and event selection; the atlas does not reproduce its model."
+  },
+  {
+    "id": "runners_erratum",
+    "authors": "International Journal of Sports Physiology and Performance",
+    "year": 2024,
+    "title": "Erratum: Injury Prediction in Competitive Runners With Machine Learning",
+    "url": "https://doi.org/10.1123/ijspp.2024-0251",
+    "type": "Erratum",
+    "use_es": "Debe leerse junto al artículo original y al README corregido de la fuente.",
+    "use_en": "Read alongside the original article and corrected source README."
+  },
+  {
+    "id": "ioc",
+    "authors": "Bahr R et al.",
+    "year": 2020,
+    "title": "International Olympic Committee consensus statement: methods for recording and reporting of epidemiological data on injury and illness in sport 2020 (including STROBE-SIIS)",
+    "url": "https://doi.org/10.1136/bjsports-2019-101969",
+    "type": "Methods consensus",
+    "use_es": "Distinguir definición de lesión, exposición, severidad, recurrencia y carga.",
+    "use_en": "Separate injury definition, exposure, severity, recurrence and burden."
+  },
+  {
+    "id": "burden",
+    "authors": "Bahr R, Clarsen B, Ekstrand J",
+    "year": 2018,
+    "title": "Why we should focus on the burden of injuries and illnesses, not just their incidence",
+    "url": "https://doi.org/10.1136/bjsports-2017-098160",
+    "type": "Methods editorial",
+    "use_es": "Frecuencia y consecuencias son dimensiones distintas; no valida los registros de Kaggle.",
+    "use_en": "Frequency and consequences are distinct dimensions; it does not validate the Kaggle records."
+  },
+  {
+    "id": "football_data",
+    "authors": "Sanan Muzaffarov",
+    "year": 2025,
+    "title": "European Football Injuries (2020–2025), Kaggle version 2",
+    "url": "https://www.kaggle.com/datasets/sananmuzaffarov/european-football-injuries-2020-2025/versions/2",
+    "type": "Original dataset · CC BY-SA 4.0",
+    "use_es": "Fuente de ausencias reportadas; sin verificación clínica independiente en el proyecto.",
+    "use_en": "Reported absence source; no independent clinical verification in the project."
+  }
+]

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Cite this independent integration and the original datasets separately."
+type: software
+title: "Sports Rehab Intelligence: A Three-Study Evidence Atlas"
+version: 1.0.0
+date-released: 2026-11-01
+authors:
+  - family-names: Gómez López
+    given-names: Víctor Andrés
+repository-code: "https://github.com/victorgomezadapty/sports-rehab-intelligence"
+url: "https://sports-rehab-intelligence.vercel.app"
+license: MIT

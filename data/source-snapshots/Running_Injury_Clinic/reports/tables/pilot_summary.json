@@ -1,0 +1,32 @@
+{
+  "participants": 30,
+  "healthy": 15,
+  "injured": 15,
+  "features_per_side": 13,
+  "expected_bilateral_slots": 780,
+  "finite_source_values": 780,
+  "provisionally_available_values": 780,
+  "structural_pass_trials": 30,
+  "trials_with_temporal_review": 0,
+  "cache_hits": 30,
+  "placeholder_names_identified_in_source": 36,
+  "observed_placeholder_records": 2160,
+  "nonzero_placeholder_records": 0,
+  "independently_validated_events_trials": 0,
+  "fully_biomechanically_usable_running_count": null,
+  "registry_sha256": "486c7382e4b89fae365991fa03c959f307420e7b4682649845d258aeb685fa7e",
+  "pilot_manifest_sha256": "0ebffe1704471632f2f2a947194d813af9a857da175422fe237b88c390035ed4",
+  "official_tutorials": [
+    {
+      "file": "data/raw/official_code/Supplemental_materials/Tutorials/tutorial_1.mlx",
+      "sha256": "1ab81b6a4245687676772186d8a256f6cf44d44e15916d32ab339b15a9dce81c",
+      "reviewed_as": "source XML text; MATLAB notebook not executed"
+    },
+    {
+      "file": "data/raw/official_code/Supplemental_materials/Tutorials/tutorial_2.mlx",
+      "sha256": "ca6cb6ba9457ca80e64040ce2acd37dd27205f3fcdca8192ecc05195c98fc723",
+      "reviewed_as": "source XML text; MATLAB notebook not executed"
+    }
+  ],
+  "method": "source scalar extraction and structural/internal-consistency QC; no joint-angle reconstruction, waveform inference or ML"
+}

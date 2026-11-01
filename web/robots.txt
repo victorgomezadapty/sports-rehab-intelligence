@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sports-rehab-intelligence.vercel.app/sitemap.xml

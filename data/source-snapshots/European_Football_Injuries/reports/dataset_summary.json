@@ -1,0 +1,58 @@
+{
+  "raw_rows": 15603,
+  "raw_columns": 11,
+  "analysis_records": 15603,
+  "unique_recorded_player_names": 4081,
+  "clubs": 145,
+  "leagues": [
+    "Bundesliga",
+    "La Liga",
+    "Ligue 1",
+    "Premier League",
+    "Serie A"
+  ],
+  "seasons": [
+    "20/21",
+    "21/22",
+    "22/23",
+    "23/24",
+    "24/25"
+  ],
+  "positions": [
+    "Attacking Midfield",
+    "Central Midfield",
+    "Centre-Back",
+    "Defensive Midfield",
+    "Forward",
+    "Goalkeeper",
+    "Left Midfield",
+    "Left Winger",
+    "Left-Back",
+    "Midfielder",
+    "Right Midfield",
+    "Right Winger",
+    "Right-Back",
+    "Second Striker"
+  ],
+  "raw_injury_labels": 276,
+  "dates": {
+    "injury_start": {
+      "min": "2020-02-01",
+      "max": "2025-06-30"
+    },
+    "injury_end": {
+      "min": "2020-03-14",
+      "max": "2026-01-15"
+    }
+  },
+  "reported_total_days_out": 563314.0,
+  "reported_total_games_missed": 85928.0,
+  "median_reported_days_out": 18.0,
+  "median_reported_games_missed": 3.0,
+  "players_with_multiple_records": 2795,
+  "players_with_repeated_same_label": 1124,
+  "potential_duplicate_rows": 1973,
+  "candidate_episode_count_sensitivity": 14611,
+  "as_of": "2026-10-26",
+  "scope": "Milestone 1. No survival modeling, prediction or external-data integration."
+}

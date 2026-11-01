@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+.vercel/
+node_modules/
+dist/
+.env*
+reports/qa/
+delivery/kaggle/*.zip

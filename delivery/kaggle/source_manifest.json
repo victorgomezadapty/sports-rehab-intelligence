@@ -1,0 +1,126 @@
+{
+  "snapshot_date": "2026-11-01",
+  "files": [
+    {
+      "source_id": "ric",
+      "path": "data/source-snapshots/Running_Injury_Clinic/reports/tables/cohort_counts.json",
+      "original_project_path": "reports/tables/cohort_counts.json",
+      "repository": "https://github.com/victorgomezadapty/running-injury-clinic",
+      "commit": "030173cbad70f17c0000812f4fb8fdf2426c0de0",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/running-injury-clinic/030173cbad70f17c0000812f4fb8fdf2426c0de0/reports/tables/cohort_counts.json",
+      "sha256": "cdebdbfca13697aba947a856177d69f2ce3f91d1654a9523942173a195c52125",
+      "git_blob_sha256": "85da0ad1fdf0bfbe5f222b2b4390c40226158e034f7ed4a7c536f9eef745f331",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "ric",
+      "path": "data/source-snapshots/Running_Injury_Clinic/reports/tables/pilot_summary.json",
+      "original_project_path": "reports/tables/pilot_summary.json",
+      "repository": "https://github.com/victorgomezadapty/running-injury-clinic",
+      "commit": "030173cbad70f17c0000812f4fb8fdf2426c0de0",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/running-injury-clinic/030173cbad70f17c0000812f4fb8fdf2426c0de0/reports/tables/pilot_summary.json",
+      "sha256": "9014563995e0084197fca9dc32ac98300a0e8a96cdada0384d184ed001d96611",
+      "git_blob_sha256": "6a5e26f590d31ddd6d0132310ac500c8ab62ceb9b24bdcd8bd67caf1f02d4605",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "ric",
+      "path": "data/source-snapshots/Running_Injury_Clinic/handoff/pilot_feature_catalog.csv",
+      "original_project_path": "handoff/pilot_feature_catalog.csv",
+      "repository": "https://github.com/victorgomezadapty/running-injury-clinic",
+      "commit": "030173cbad70f17c0000812f4fb8fdf2426c0de0",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/running-injury-clinic/030173cbad70f17c0000812f4fb8fdf2426c0de0/handoff/pilot_feature_catalog.csv",
+      "sha256": "c46ca5d9c21d455ff38264f488def8c1a2603cb9192345f3936961b63b3e618e",
+      "git_blob_sha256": "be1b4f86b804464f32642396df0c884d0badc11e20f2326d908dfa2563fdd1c3",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "ric",
+      "path": "data/source-snapshots/Running_Injury_Clinic/reports/tables/pilot_descriptive_summary.csv",
+      "original_project_path": "reports/tables/pilot_descriptive_summary.csv",
+      "repository": "https://github.com/victorgomezadapty/running-injury-clinic",
+      "commit": "030173cbad70f17c0000812f4fb8fdf2426c0de0",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/running-injury-clinic/030173cbad70f17c0000812f4fb8fdf2426c0de0/reports/tables/pilot_descriptive_summary.csv",
+      "sha256": "50885a35a8b9868e22f2a4cc827cfe919d323b52c2d09dc33e2642239cfbe072",
+      "git_blob_sha256": "6e403ea6e598091debfb63efa2010144c7f8d5fa6b4bc7746af92be281e0e775",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "competitive_runners",
+      "path": "data/source-snapshots/Competitive_Runners/competitive-runners-injury-risk/reports/tables/audit_summary.json",
+      "original_project_path": "reports/tables/audit_summary.json",
+      "repository": "https://github.com/victorgomezadapty/competitive-runners-injury-risk",
+      "commit": "fa7012a6289868d1fff8bc2ed8ed9bbd1cd7d7d5",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/competitive-runners-injury-risk/fa7012a6289868d1fff8bc2ed8ed9bbd1cd7d7d5/reports/tables/audit_summary.json",
+      "sha256": "a7bc7ff71f515ee5674ac12a3f3897c3397df28b3e1510415a7eca1c4857413e",
+      "git_blob_sha256": "a7bc7ff71f515ee5674ac12a3f3897c3397df28b3e1510415a7eca1c4857413e",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "competitive_runners",
+      "path": "data/source-snapshots/Competitive_Runners/competitive-runners-injury-risk/handoff/feature_catalog.csv",
+      "original_project_path": "handoff/feature_catalog.csv",
+      "repository": "https://github.com/victorgomezadapty/competitive-runners-injury-risk",
+      "commit": "fa7012a6289868d1fff8bc2ed8ed9bbd1cd7d7d5",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/competitive-runners-injury-risk/fa7012a6289868d1fff8bc2ed8ed9bbd1cd7d7d5/handoff/feature_catalog.csv",
+      "sha256": "18b83a4f3f860a223eea28fc189ce8b3ad669c7fa1613e32df0ec24bb1d1094b",
+      "git_blob_sha256": "18b83a4f3f860a223eea28fc189ce8b3ad669c7fa1613e32df0ec24bb1d1094b",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "competitive_runners",
+      "path": "data/source-snapshots/Competitive_Runners/competitive-runners-injury-risk/reports/phase_02/tables/primary_summary.csv",
+      "original_project_path": "reports/phase_02/tables/primary_summary.csv",
+      "repository": "https://github.com/victorgomezadapty/competitive-runners-injury-risk",
+      "commit": "fa7012a6289868d1fff8bc2ed8ed9bbd1cd7d7d5",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/competitive-runners-injury-risk/fa7012a6289868d1fff8bc2ed8ed9bbd1cd7d7d5/reports/phase_02/tables/primary_summary.csv",
+      "sha256": "7795db01533853ceec414a31e5143188b84cd8825947f042eb8277908b3e4b7c",
+      "git_blob_sha256": "7795db01533853ceec414a31e5143188b84cd8825947f042eb8277908b3e4b7c",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "european_football",
+      "path": "data/source-snapshots/European_Football_Injuries/reports/dataset_summary.json",
+      "original_project_path": "reports/dataset_summary.json",
+      "repository": "https://github.com/victorgomezadapty/european-football-injuries",
+      "commit": "26a4df77c7ba7de9ee43524d35f6fd97d222b092",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/european-football-injuries/26a4df77c7ba7de9ee43524d35f6fd97d222b092/reports/dataset_summary.json",
+      "sha256": "09b079c62ea15eb4cb2400182f2adba52bff8c643a79d614cbfdfe26d9856b33",
+      "git_blob_sha256": "46e5421a261fe291fa29272a4d0d883fa08232cca9a49c96a2329961189e9716",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "european_football",
+      "path": "data/source-snapshots/European_Football_Injuries/handoff/feature_catalog.csv",
+      "original_project_path": "handoff/feature_catalog.csv",
+      "repository": "https://github.com/victorgomezadapty/european-football-injuries",
+      "commit": "26a4df77c7ba7de9ee43524d35f6fd97d222b092",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/european-football-injuries/26a4df77c7ba7de9ee43524d35f6fd97d222b092/handoff/feature_catalog.csv",
+      "sha256": "71d28baa685f79073f4c79b5bd5fef9b27cc4affe22bbc66a6c7909a9d21bce0",
+      "git_blob_sha256": "71d28baa685f79073f4c79b5bd5fef9b27cc4affe22bbc66a6c7909a9d21bce0",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "european_football",
+      "path": "data/source-snapshots/European_Football_Injuries/reports/tables/duplicate_sensitivity.csv",
+      "original_project_path": "reports/tables/duplicate_sensitivity.csv",
+      "repository": "https://github.com/victorgomezadapty/european-football-injuries",
+      "commit": "26a4df77c7ba7de9ee43524d35f6fd97d222b092",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/european-football-injuries/26a4df77c7ba7de9ee43524d35f6fd97d222b092/reports/tables/duplicate_sensitivity.csv",
+      "sha256": "61318b6b16da6b810fc24476ea9eadfac74fdf95b21d11c9f3a676b160e891de",
+      "git_blob_sha256": "e13b4a932055106a1897d2bb3fa1f8f415929311652565cddf445a37bfcb4594",
+      "scope": "Aggregate summary or variable definitions only"
+    },
+    {
+      "source_id": "european_football",
+      "path": "data/source-snapshots/European_Football_Injuries/web/downloads/injury_burden.csv",
+      "original_project_path": "web/downloads/injury_burden.csv",
+      "repository": "https://github.com/victorgomezadapty/european-football-injuries",
+      "commit": "26a4df77c7ba7de9ee43524d35f6fd97d222b092",
+      "raw_url": "https://raw.githubusercontent.com/victorgomezadapty/european-football-injuries/26a4df77c7ba7de9ee43524d35f6fd97d222b092/web/downloads/injury_burden.csv",
+      "sha256": "7e921b154164adf256b5782041fe82266d70a997eda1363c41b44e2ebf69d667",
+      "git_blob_sha256": "7e921b154164adf256b5782041fe82266d70a997eda1363c41b44e2ebf69d667",
+      "scope": "Aggregate summary or variable definitions only"
+    }
+  ]
+}

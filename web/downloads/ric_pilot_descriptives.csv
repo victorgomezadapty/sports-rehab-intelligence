@@ -1,0 +1,27 @@
+feature,domain,unit,phase,side,n,median,q1,q3,minimum,maximum,source
+STRIDE_RATE,spatiotemporal,strides/min,successive ipsilateral touchdowns,left,30,81.6364,80,84.9565,76.4331,93.3866,source-provided dv_r summary; not independently reprocessed
+STRIDE_RATE,spatiotemporal,strides/min,successive ipsilateral touchdowns,right,30,81.6364,80,84.9565,76.4331,93.0233,source-provided dv_r summary; not independently reprocessed
+STRIDE_LENGTH,spatiotemporal,m,successive ipsilateral touchdowns,left,30,2.01456,1.88988,2.14091,0.820022,2.66949,source-provided dv_r summary; not independently reprocessed
+STRIDE_LENGTH,spatiotemporal,m,successive ipsilateral touchdowns,right,30,2.00728,1.88988,2.13527,0.814165,2.67987,source-provided dv_r summary; not independently reprocessed
+SWING_TIME,spatiotemporal,s,toe-off to next ipsilateral touchdown,left,30,0.4425,0.425,0.461875,0.3,0.525,source-provided dv_r summary; not independently reprocessed
+SWING_TIME,spatiotemporal,s,toe-off to next ipsilateral touchdown,right,30,0.43875,0.41375,0.4625,0.36,0.525,source-provided dv_r summary; not independently reprocessed
+STANCE_TIME,spatiotemporal,s,touchdown to toe-off,left,30,0.2875,0.27625,0.305,0.25,0.345,source-provided dv_r summary; not independently reprocessed
+STANCE_TIME,spatiotemporal,s,touchdown to toe-off,right,30,0.29,0.27125,0.305,0.235,0.3475,source-provided dv_r summary; not independently reprocessed
+ANKLE_DF_PEAK_ANGLE,ankle,deg,whole normalized stance,left,30,19.9659,17.9324,22.641,14.8367,25.9846,source-provided dv_r summary; not independently reprocessed
+ANKLE_DF_PEAK_ANGLE,ankle,deg,whole normalized stance,right,30,21.2612,19.9456,23.3248,16.4066,25.0547,source-provided dv_r summary; not independently reprocessed
+ANKLE_EVE_PEAK_ANGLE,ankle,deg,whole normalized stance,left,30,-5.83436,-8.75812,-4.63929,-10.0617,-0.578856,source-provided dv_r summary; not independently reprocessed
+ANKLE_EVE_PEAK_ANGLE,ankle,deg,whole normalized stance,right,30,-6.53133,-8.63238,-4.83729,-11.9851,1.05776,source-provided dv_r summary; not independently reprocessed
+ANKLE_ROT_PEAK_ANGLE,ankle,deg,whole normalized stance,left,30,2.50459,-1.55793,5.4897,-12.8411,11.9191,source-provided dv_r summary; not independently reprocessed
+ANKLE_ROT_PEAK_ANGLE,ankle,deg,whole normalized stance,right,30,1.28281,-2.18338,4.28471,-15.463,16.6698,source-provided dv_r summary; not independently reprocessed
+KNEE_FLEX_PEAK_ANGLE,knee,deg,first 70 of 101 normalized stance samples,left,30,-41.6461,-46.3923,-36.9063,-51.4275,-30.003,source-provided dv_r summary; not independently reprocessed
+KNEE_FLEX_PEAK_ANGLE,knee,deg,first 70 of 101 normalized stance samples,right,30,-42.3678,-45.3252,-39.1366,-51.3276,-31.3746,source-provided dv_r summary; not independently reprocessed
+KNEE_ADD_PEAK_ANGLE,knee,deg,whole normalized stance,left,30,-3.23462,-5.0974,-2.09966,-9.63956,3.22495,source-provided dv_r summary; not independently reprocessed
+KNEE_ADD_PEAK_ANGLE,knee,deg,whole normalized stance,right,30,-4.77397,-6.23901,-2.28823,-13.8765,3.65052,source-provided dv_r summary; not independently reprocessed
+KNEE_ROT_PEAK_ANGLE,knee,deg,whole normalized stance,left,30,-10.4324,-14.5696,-4.62214,-28.1824,10.9214,source-provided dv_r summary; not independently reprocessed
+KNEE_ROT_PEAK_ANGLE,knee,deg,whole normalized stance,right,30,-12.6798,-17.5265,-11.2142,-27.1003,-3.34809,source-provided dv_r summary; not independently reprocessed
+HIP_EXT_PEAK_ANGLE,hip,deg,whole normalized stance,left,30,-13.7535,-17.2255,-7.12782,-27.701,18.2384,source-provided dv_r summary; not independently reprocessed
+HIP_EXT_PEAK_ANGLE,hip,deg,whole normalized stance,right,30,-13.0936,-17.2955,-8.84011,-27.7712,15.4203,source-provided dv_r summary; not independently reprocessed
+HIP_ADD_PEAK_ANGLE,hip,deg,first 60 of 101 normalized stance samples,left,30,9.15189,5.35019,10.8772,2.46173,18.3904,source-provided dv_r summary; not independently reprocessed
+HIP_ADD_PEAK_ANGLE,hip,deg,first 60 of 101 normalized stance samples,right,30,6.61587,5.16315,10.1906,0.916402,13.9596,source-provided dv_r summary; not independently reprocessed
+HIP_ROT_PEAK_ANGLE,hip,deg,whole normalized stance,left,30,15.0297,9.40438,17.4074,-5.12526,24.4497,source-provided dv_r summary; not independently reprocessed
+HIP_ROT_PEAK_ANGLE,hip,deg,whole normalized stance,right,30,17.7535,12.3408,20.1029,1.15072,26.7212,source-provided dv_r summary; not independently reprocessed

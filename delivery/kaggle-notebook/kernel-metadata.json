@@ -1,0 +1,16 @@
+{
+  "id": "vctorandrsgmezlpez/sports-rehab-three-study-evidence-audit",
+  "title": "Sports Rehab Three-Study Evidence Audit",
+  "code_file": "evidence_atlas_audit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [
+    "vctorandrsgmezlpez/sports-rehab-intelligence-evidence-atlas"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
