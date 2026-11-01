@@ -3,7 +3,10 @@ import contextlib
 import hashlib
 import io
 import json
+import shutil
+import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 from pathlib import Path
 
@@ -59,6 +62,25 @@ class IntegrationContracts(unittest.TestCase):
                 with self.subTest(cell=index):
                     with contextlib.redirect_stdout(io.StringIO()):
                         exec(compile(''.join(cell['source']), f'notebook-cell-{index}', 'exec'), namespace)
+
+    def test_notebook_supports_kaggle_expanded_archive(self):
+        notebook = json.loads((ROOT / 'notebooks/01_evidence_atlas_audit.ipynb').read_text(encoding='utf-8'))
+        with tempfile.TemporaryDirectory(prefix='sports-rehab-kaggle-') as temporary:
+            mounted = Path(temporary)
+            for item in RELEASE.iterdir():
+                if item.is_file() and item.name != 'source_snapshots.zip':
+                    shutil.copyfile(item, mounted / item.name)
+            with zipfile.ZipFile(RELEASE / 'source_snapshots.zip') as archive:
+                for member in archive.namelist():
+                    target = mounted / 'source_snapshots' / member
+                    self.assertTrue(target.resolve().is_relative_to(mounted.resolve()))
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(archive.read(member))
+            namespace = {'__name__': '__main__'}
+            with patch('pathlib.Path.cwd', return_value=mounted), contextlib.redirect_stdout(io.StringIO()):
+                for cell in notebook['cells']:
+                    if cell['cell_type'] == 'code':
+                        exec(compile(''.join(cell['source']), 'expanded-kaggle-cell', 'exec'), namespace)
 
 
 if __name__ == '__main__':

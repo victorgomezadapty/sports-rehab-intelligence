@@ -54,15 +54,24 @@ The original source archive contains eleven aggregate or definition files, with 
 """)
     cell("code", """
 release = read_json('release_manifest.json')
+archive_expanded = not (DATA / 'source_snapshots.zip').is_file()
 for name, expected in release['files'].items():
+    if name == 'source_snapshots.zip' and archive_expanded:
+        continue  # Kaggle expands uploaded ZIPs; verify all extracted source bytes below.
     assert hashlib.sha256((DATA / name).read_bytes()).hexdigest() == expected, name
 manifest = read_json('source_manifest.json')
-with zipfile.ZipFile(DATA / 'source_snapshots.zip') as archive:
-    expected_paths = {row['path'] for row in manifest['files']}
-    assert set(archive.namelist()) == expected_paths
-    for row in manifest['files']:
-        assert hashlib.sha256(archive.read(row['path'])).hexdigest() == row['sha256'], row['path']
-print('Verified', len(release['files']), 'release files and', len(manifest['files']), 'frozen sources.')
+def source_bytes(path):
+    if not archive_expanded:
+        with zipfile.ZipFile(DATA / 'source_snapshots.zip') as archive:
+            assert set(archive.namelist()) == {row['path'] for row in manifest['files']}
+            return archive.read(path)
+    matches = [item for item in DATA.rglob(Path(path).name) if item.is_file() and item.relative_to(DATA).as_posix().endswith(path)]
+    assert len(matches) == 1, ('Missing or ambiguous expanded source', path, matches)
+    return matches[0].read_bytes()
+for row in manifest['files']:
+    assert hashlib.sha256(source_bytes(row['path'])).hexdigest() == row['sha256'], row['path']
+print('Verified', len(release['files']) - int(archive_expanded), 'release files and', len(manifest['files']), 'frozen sources.')
+print('Source container:', 'platform-expanded ZIP; every source file verified' if archive_expanded else 'original ZIP verified')
 """)
     cell("markdown", """
 ## 2. Reconcile the catalogue to the original definitions
@@ -73,15 +82,14 @@ fields. Their sum is a catalogue size, **not a combined modelling matrix**.
     cell("code", """
 assert len(catalog) == len({row['catalog_key'] for row in catalog}) == 104
 feature_key = {'ric': 'feature', 'competitive_runners': 'feature_name', 'european_football': 'feature'}
-with zipfile.ZipFile(DATA / 'source_snapshots.zip') as archive:
-    for source in atlas['sources']:
-        path = next(row['path'] for row in manifest['files'] if row['source_id'] == source['source_id'] and row['original_project_path'] == ('handoff/pilot_feature_catalog.csv' if source['source_id'] == 'ric' else 'handoff/feature_catalog.csv'))
-        originals = list(csv.DictReader(io.StringIO(archive.read(path).decode('utf-8-sig'))))
-        exported = [row for row in catalog if row['source_id'] == source['source_id']]
-        assert len(originals) == len(exported) == source['catalog_definition_count']
-        for original, compiled in zip(originals, exported):
-            assert original == json.loads(compiled['original_definition_json'])
-            assert compiled['catalog_key'] == source['source_id'] + ':' + original[feature_key[source['source_id']]]
+for source in atlas['sources']:
+    path = next(row['path'] for row in manifest['files'] if row['source_id'] == source['source_id'] and row['original_project_path'] == ('handoff/pilot_feature_catalog.csv' if source['source_id'] == 'ric' else 'handoff/feature_catalog.csv'))
+    originals = list(csv.DictReader(io.StringIO(source_bytes(path).decode('utf-8-sig'))))
+    exported = [row for row in catalog if row['source_id'] == source['source_id']]
+    assert len(originals) == len(exported) == source['catalog_definition_count']
+    for original, compiled in zip(originals, exported):
+        assert original == json.loads(compiled['original_definition_json'])
+        assert compiled['catalog_key'] == source['source_id'] + ':' + original[feature_key[source['source_id']]]
 show([{'source': s['project'], 'definitions': s['catalog_definition_count']} for s in atlas['sources']], ['source', 'definitions'])
 """)
     cell("markdown", """

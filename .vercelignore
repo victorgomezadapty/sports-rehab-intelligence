@@ -1,10 +1,10 @@
 .git
 .github
-data
-delivery
-docs
-notebooks
-reports
-tests
+/data
+/delivery
+/docs
+/notebooks
+/reports
+/tests
 __pycache__
 .venv
