@@ -1,3 +1,6 @@
+import { summarizeAtlas } from './synthesis.js';
+import { createMovementExplorer } from './movement.js';
+
 let language = 'es';
 try { language = localStorage.getItem('sri-language') === 'en' ? 'en' : 'es'; } catch {}
 let atlas;
@@ -12,6 +15,32 @@ const t = (es, en) => language === 'es' ? es : en;
 const number = (value, precision = 0) => Number(value).toLocaleString(language === 'es' ? 'es-ES' : 'en-US', { minimumFractionDigits: precision, maximumFractionDigits: precision, useGrouping: true });
 const sourceNames = { ric: 'RIC', competitive_runners: 'RUNNERS', european_football: 'FOOTBALL' };
 const statuses = () => ({ available: t('Registrado', 'Recorded'), provisional: t('Provisional', 'Provisional'), different_construct: t('Otro constructo', 'Different construct'), not_available: t('No disponible', 'Not available') });
+const movementExplorer = createMovementExplorer();
+
+function renderSynthesis() {
+  const container = $('#conclusion-results');
+  if (!container) return;
+  const facts = summarizeAtlas(atlas);
+  const cards = [
+    {
+      tag: '01 / MOVEMENT', title: t('Medir movimiento todavía no identifica una lesión.', 'Measuring movement does not yet identify injury.'),
+      result: t(`La mediana de STRIDE_RATE fue ${number(facts.strideLeft, 2)} zancadas/min en ambos lados, dentro del piloto seleccionado de ${facts.pilotN} personas.`, `Median STRIDE_RATE was ${number(facts.strideLeft, 2)} strides/min on both sides in the selected ${facts.pilotN}-person pilot.`),
+      meaning: t('El piloto permite describir mediciones y revisar su calidad. No se estimaron diferencias por lesión ni se validó un biomarcador; los eventos y ciclos siguen pendientes de validación.', 'The pilot describes measurements and their quality. It did not estimate injury-group differences or validate a biomarker; event and cycle validation remains pending.'), link: '#movement', linkLabel: t('Explorar movimiento y mediciones', 'Explore movement and measurements'),
+    },
+    {
+      tag: '02 / TRAINING', title: t('La historia de carga aporta una señal limitada.', 'Training history provides a limited signal.'),
+      result: t(`En atletas nuevos y un periodo futuro: AP ${number(facts.averagePrecision, 4)}, frente a ${number(facts.positiveFraction, 4)} de fracción positiva en ${number(facts.testRows)} filas de test.`, `For unseen athletes in a future period: AP ${number(facts.averagePrecision, 4)}, against a ${number(facts.positiveFraction, 4)} positive fraction in ${number(facts.testRows)} test rows.`),
+      meaning: t('Ese resultado muestra una capacidad de ordenación modesta en la muestra seleccionada. No basta para trasladar el modelo a alertas clínicas; además, los controles se eligieron usando aptitud futura.', 'That result shows modest ranking in the selected sample. It is insufficient to transfer the model into clinical alerts; controls were also selected using future fitness.'), link: '#studies', linkLabel: t('Ver evaluación y estudio original', 'View evaluation and original study'),
+    },
+    {
+      tag: '03 / CONSEQUENCES', title: t('Lo más frecuente no acumula la mayor carga.', 'The most frequent label does not have the greatest burden.'),
+      result: t(`Hamstring injury lidera la frecuencia: ${number(facts.mostFrequent.injury_count)} registros. Cruciate ligament tear lidera la suma: ${number(facts.greatestBurden.total_days_out)} días-episodio en ${number(facts.greatestBurden.injury_count)} registros.`, `Hamstring injury leads frequency: ${number(facts.mostFrequent.injury_count)} records. Cruciate ligament tear leads summed burden: ${number(facts.greatestBurden.total_days_out)} episode-days in ${number(facts.greatestBurden.injury_count)} records.`),
+      meaning: t('Contar registros y cuantificar sus consecuencias cambia qué etiquetas destacan. La prioridad descriptiva depende de la medida; las sumas pueden repetir días y no son una tasa de incidencia.', 'Counting records and quantifying consequences changes which labels stand out. Descriptive priorities depend on the measure; sums can repeat days and are not incidence rates.'), link: '#studies', linkLabel: t('Comparar frecuencia y consecuencias', 'Compare frequency and consequences'),
+    },
+  ];
+  container.innerHTML = cards.map((card, index) => `<article class="finding-card finding-${index}"><span class="finding-tag">${card.tag}</span><h3>${card.title}</h3><p class="finding-result">${card.result}</p><p>${card.meaning}</p><a href="${card.link}"${index > 0 ? ` data-open-study="${index === 1 ? 'competitive_runners' : 'european_football'}"` : ''}>${card.linkLabel} ↗</a></article>`).join('');
+  container.querySelectorAll('[data-open-study]').forEach((link) => link.addEventListener('click', () => { selected = link.dataset.openStudy; renderStudy(); }));
+}
 
 function setLanguage() {
   document.documentElement.lang = language;
@@ -23,6 +52,9 @@ function setLanguage() {
   }
   const group = $('.study-tabs');
   group?.setAttribute('aria-label', t('Elegir estudio', 'Choose a study'));
+  $('.joint-controls')?.setAttribute('aria-label', t('Articulación', 'Joint'));
+  if ($('#runner-title')) $('#runner-title').textContent = t('Esquema animado de un corredor', 'Animated runner diagram');
+  if ($('#runner-desc')) $('#runner-desc').textContent = t('Animación didáctica de articulaciones. No reproduce trayectorias, ángulos o eventos de participantes.', 'Educational joint animation. It does not reproduce participant trajectories, angles or events.');
   $('#motion')?.setAttribute('aria-label', t('Pausar o reanudar el diagrama conceptual', 'Pause or resume the conceptual diagram'));
   $('#map-title') && ($('#map-title').textContent = t('Tres fuentes conectadas en un atlas de evidencia', 'Three sources connected in an evidence atlas'));
   $('#map-desc') && ($('#map-desc').textContent = t('Diagrama conceptual de dominios complementarios. No representa participantes vinculados ni causalidad.', 'Conceptual diagram of complementary domains. It does not represent linked participants or causality.'));
@@ -80,6 +112,7 @@ function renderStudy() {
   const panel = $('#study-panel');
   if (!panel) return;
   const source = atlas.sources.find((source) => source.source_id === selected);
+  const findings = summarizeAtlas(atlas);
   const content = {
     ric: {
       title: t('El movimiento, con su contexto.', 'Movement, with its context.'),
@@ -87,6 +120,10 @@ function renderStudy() {
       metrics: [['30', t('personas en el piloto', 'people in the pilot')], ['13', t('variables por lado', 'variables per side')], ['780', t('escalares de origen', 'source scalars')]],
       note: t('Validación oficial de eventos y ciclos pendiente: 0 ensayos validados independientemente en esta entrega. Los valores no son umbrales diagnósticos.', 'Official event and cycle validation pending: 0 independently validated trials in this release. Values are not diagnostic thresholds.'),
       slug: 'running-injury-clinic',
+      method: t('Piloto técnico seleccionado: 30 personas, 13 variables por lado y control estructural de los archivos. Se extraen escalares de origen, sin reconstrucción independiente.', 'Selected technical pilot: 30 people, 13 variables per side and structural file checks. Upstream scalars are extracted without independent reconstruction.'),
+      finding: t(`STRIDE_RATE tiene una mediana de ${number(findings.strideLeft, 2)} zancadas/min en ambos lados. Esa coincidencia de medianas grupales no demuestra simetría individual ni normalidad clínica.`, `Median STRIDE_RATE is ${number(findings.strideLeft, 2)} strides/min on both sides. Equal group medians do not establish individual symmetry or clinical normality.`),
+      conclusion: t('Aporta una base descriptiva del movimiento y sus convenciones. El siguiente paso es validar eventos/ciclos antes de inferir diferencias biomecánicas por lesión.', 'It provides a descriptive movement baseline and its conventions. The next step is event/cycle validation before inferring injury-related biomechanical differences.'),
+      paper: 'https://doi.org/10.1038/s41597-024-04011-7', paperLabel: t('Descriptor científico de la fuente', 'Scientific source descriptor'),
     },
     competitive_runners: {
       title: t('El entrenamiento antes de la etiqueta.', 'Training before the label.'),
@@ -94,6 +131,10 @@ function renderStudy() {
       metrics: [['74', t('atletas', 'athletes')], [number(42766), t('eventos Day seleccionados', 'selected Day events')], ['583', t('etiquetas retenidas', 'retained labels')]],
       note: t('Los controles se seleccionaron usando aptitud futura. La proporción de etiquetas y el rendimiento en test dependen de esa muestra; no son riesgo clínico ni incidencia.', 'Controls were selected using future fitness. Label fraction and test performance depend on that sample; they are not clinical risk or incidence.'),
       slug: 'competitive-runners-injury-risk',
+      method: t('Reanálisis de 74 atletas con modelos logísticos fijos, calibración independiente y separación temporal y por atleta. Aquí se muestran los resultados primarios ya guardados.', 'Reanalysis of 74 athletes with fixed logistic models, independent calibration and temporal/athlete separation. This view presents saved primary results.'),
+      finding: t(`En el test combinado de atletas nuevos y futuro: ${number(findings.testLabels)} etiquetas en ${number(findings.testRows)} filas; AP ${number(findings.averagePrecision, 4)} y ROC-AUC ${number(findings.rocAuc, 4)}.`, `In the combined unseen-athlete/future test: ${number(findings.testLabels)} labels in ${number(findings.testRows)} rows; AP ${number(findings.averagePrecision, 4)} and ROC-AUC ${number(findings.rocAuc, 4)}.`),
+      conclusion: t('Las señales de entrenamiento no bastaron para establecer utilidad clínica. Evaluar atletas nuevos y tiempo futuro es una pregunta más exigente que describir asociaciones retrospectivas.', 'Training signals did not establish clinical utility. Evaluating unseen athletes and future time asks a more demanding question than describing retrospective associations.'),
+      paper: 'https://doi.org/10.1123/ijspp.2020-0518', paperLabel: t('Estudio original · leer junto a su errata', 'Original study · read alongside its erratum'),
     },
     european_football: {
       title: t('El coste de estar ausente.', 'The cost of being absent.'),
@@ -101,10 +142,15 @@ function renderStudy() {
       metrics: [[number(15603), t('registros de ausencia', 'absence records')], ['5', t('ligas europeas', 'European leagues')], ['18', t('mediana de días / registro', 'median days / record')]],
       note: t('Los nombres no verifican identidad. No hay exposición elegible completa ni retorno clínico confirmado. Frecuencia de registros, carga acumulada y disponibilidad son conceptos distintos.', 'Names do not verify identity. Complete eligible exposure and verified clinical return are absent. Record frequency, cumulative burden and availability are different concepts.'),
       slug: 'european-football-injuries',
+      method: t('Análisis descriptivo por etiqueta original: frecuencia, duración reportada y partidos perdidos. La vista de 14.611 registros es sensibilidad al colapso de intervalos candidatos repetidos.', 'Descriptive original-label analysis: frequency, reported duration and match loss. The 14,611-record view is a candidate repeated-interval collapsing sensitivity.'),
+      finding: t(`Hamstring injury: ${number(findings.mostFrequent.injury_count)} registros y ${number(findings.mostFrequent.total_days_out)} días-episodio. Cruciate ligament tear: ${number(findings.greatestBurden.injury_count)} registros y ${number(findings.greatestBurden.total_days_out)} días-episodio.`, `Hamstring injury: ${number(findings.mostFrequent.injury_count)} records and ${number(findings.mostFrequent.total_days_out)} episode-days. Cruciate ligament tear: ${number(findings.greatestBurden.injury_count)} records and ${number(findings.greatestBurden.total_days_out)} episode-days.`),
+      conclusion: t('Frecuencia, severidad por registro y carga acumulada cambian la lectura del impacto. No se debe convertir una clasificación por conteo en una clasificación por riesgo o disponibilidad.', 'Frequency, per-record severity and cumulative burden change the interpretation of impact. A record-count ranking must not become a risk or availability ranking.'),
+      paper: 'https://doi.org/10.1136/bjsports-2019-101969', paperLabel: t('Consenso IOC para interpretar las medidas', 'IOC consensus for interpreting the measures'),
     },
   }[selected];
   panel.dataset.selected = selected;
   panel.innerHTML = `<div class="study-layout"><div class="study-copy"><h3>${content.title}</h3><p>${content.description}</p><div class="study-metrics">${content.metrics.map(([value, label]) => `<div><strong>${escape(value)}</strong><span>${escape(label)}</span></div>`).join('')}</div><p class="scope-note">${content.note}</p><div class="study-links"><a href="https://${content.slug}.vercel.app" target="_blank" rel="noopener">${t('Explorar estudio', 'Explore study')} ↗</a><a href="https://victor-gomez-portfolio.vercel.app/projects/${content.slug}">${t('Caso en el portfolio', 'Portfolio case')} ↗</a><a href="https://github.com/victorgomezadapty/${content.slug}" target="_blank" rel="noopener">GitHub ↗</a></div><p class="chart-caption">${escape(source.licence)}</p></div><div class="chart-panel">${chart()}</div></div>`;
+  panel.insertAdjacentHTML('beforeend', `<div class="study-interpretation"><section><h4>${t('Cómo se estudió', 'How it was studied')}</h4><p>${content.method}</p></section><section><h4>${t('Qué se encontró', 'What was found')}</h4><p>${content.finding}</p></section><section><h4>${t('Conclusión de este estudio', 'Study conclusion')}</h4><p>${content.conclusion}</p></section></div><p class="study-citation"><a href="${content.paper}" target="_blank" rel="noopener">${content.paperLabel} ↗</a> · <a href="evidence.html">${t('Todos los estudios y referencias', 'All studies and references')} ↗</a></p>`);
   document.querySelectorAll('[data-source]').forEach((button) => {
     button.classList.toggle('active', button.dataset.source === selected);
     button.setAttribute('aria-pressed', String(button.dataset.source === selected));
@@ -139,7 +185,7 @@ function renderReferences() {
   $('#references').innerHTML = atlas.references.map((reference, index) => `<article class="reference-item"><small>${String(index + 1).padStart(2, '0')} / ${escape(reference.type)}</small><h3><a href="${escape(reference.url)}" target="_blank" rel="noopener">${escape(reference.title)} ↗</a></h3><p>${escape(reference.authors)} · ${reference.year}</p><p>${escape(reference[`use_${language}`])}</p></article>`).join('');
 }
 
-function render() { renderStudy(); renderMatrix(); renderCatalog(); renderReferences(); }
+function render() { renderSynthesis(); renderStudy(); renderMatrix(); renderCatalog(); renderReferences(); movementExplorer?.update(atlas, language); }
 $('#language')?.addEventListener('click', () => { language = language === 'es' ? 'en' : 'es'; try { localStorage.setItem('sri-language', language); } catch {} setLanguage(); });
 $('#motion')?.addEventListener('click', () => { const paused = document.body.classList.toggle('motion-paused'); $('#motion').setAttribute('aria-pressed', String(paused)); updateMotionText(); });
 document.querySelectorAll('[data-source]').forEach((button) => button.addEventListener('click', () => { selected = button.dataset.source; renderStudy(); }));

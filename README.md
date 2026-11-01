@@ -28,6 +28,7 @@ The framework **movement → training → injury → consequences** describes re
 - Contextual views of RIC pilot medians/quartiles, primary held-out runners metrics and football burden/sensitivity. Numerical results remain attributed to the source analyses.
 - Eleven aggregate/definition inputs frozen to source Git commits, SHA-256 provenance, a self-contained Kaggle package and an independently executable offline audit notebook.
 - A responsive bilingual static website, conceptual SVGs, searchable catalogue, matching chart tables, reduced-motion support and a motion pause control.
+- Prominent source-specific conclusions, a joint interpretation of what the integration produced, and an interactive educational runner separating illustrative poses from real pilot medians. See the [Spanish synthesis](docs/synthesis_es.md).
 - A bilingual focused discussion and a specification for a future genuinely linked cohort.
 
 ## Reproduce offline
