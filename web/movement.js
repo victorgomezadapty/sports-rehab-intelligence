@@ -63,13 +63,15 @@ export function createMovementExplorer() {
     const ticks = []; for (let v = low; v <= high; v += (high - low) > 60 ? 20 : 10) ticks.push(`<text x="${left - 6}" y="${y(v) + 4}" text-anchor="end" class="curve-axis">${v}°</text><path d="M${left} ${y(v)}H${width - right}" stroke="#24343b"/>`);
     let pilot = ''; let note = '';
     const rows = pilotRows();
-    if (state.joint !== 'hip' && rows.length) {
+    if (state.joint === 'knee' && rows.length) {
       // RIC stores the negated stance peak for knee flexion; its magnitude is comparable with this flexion-positive curve.
       const magnitudes = rows.map((row) => Math.abs(Number(row.median)));
       const peakIndex = curve.mean.slice(0, Math.round(toe)).reduce((best, value, i, list) => value > list[best] ? i : best, 0);
       pilot = magnitudes.map((m, i) => `<path d="M${x(Math.max(0, peakIndex - 9))} ${y(m)}H${x(peakIndex + 9)}" stroke="#f0b98f" stroke-width="2.5" stroke-dasharray="${i ? '4 3' : ''}"/>`).join('') + `<text x="${x(peakIndex + 11)}" y="${y(Math.max(...magnitudes)) - 4}" class="curve-pilot">${text('Piloto RIC', 'RIC pilot')}</text>`;
       const sd = curve.sd[peakIndex];
       note = text(`Pico de apoyo de la referencia: ${fmt(curve.mean[peakIndex])}° ± ${fmt(sd)}°. Medianas del piloto RIC: ${magnitudes.map((m) => fmt(m)).join('° izq. / ')}° der. Quedan dentro de una desviación estándar.`, `Reference stance peak: ${fmt(curve.mean[peakIndex])}° ± ${fmt(sd)}°. RIC pilot medians: ${magnitudes.map((m) => fmt(m)).join('° left / ')}° right. Both fall within one standard deviation.`);
+    } else if (state.joint === 'ankle') {
+      note = text('Curva de los archivos oficiales de Figshare. Sus picos de tobillo quedan unos 3,4° por debajo de la Tabla 4 del artículo de PeerJ (cadera y rodilla coinciden), por eso no se compara con el piloto RIC.', 'Curve from the official Figshare files. Their ankle peaks sit about 3.4° below Table 4 of the PeerJ article (hip and knee match), so it is not compared with the RIC pilot.');
     } else if (state.joint === 'hip') {
       note = text('El valor de cadera de RIC es el máximo del eje 3 con el signo invertido. Esa convención no coincide con esta curva, por eso no se superpone.', 'The RIC hip value is the negated axis-3 maximum. That convention does not match this curve, so it is not overlaid.');
     }
@@ -120,7 +122,7 @@ export function createMovementExplorer() {
       select('#movement-explanation').textContent = state.joint === 'knee'
         ? text(`Medianas de ${rows[0].n} personas. RIC guarda el pico de flexión con signo negativo: −41,65° significa unos 42° de rodilla doblada en el apoyo.`, `Medians of ${rows[0].n} people. RIC stores peak flexion with a negative sign: −41.65° means about 42° of knee bend in stance.`)
         : state.joint === 'ankle'
-          ? text(`Medianas de ${rows[0].n} personas. Valor positivo: flexión dorsal máxima en el apoyo (la tibia avanza sobre el pie).`, `Medians of ${rows[0].n} people. Positive value: peak dorsiflexion in stance (the shin moves over the foot).`)
+          ? text(`Medianas de ${rows[0].n} personas. Valor positivo: flexión dorsal máxima en el apoyo (la tibia avanza sobre el pie). No se superpone a la curva de referencia.`, `Medians of ${rows[0].n} people. Positive value: peak dorsiflexion in stance (the shin moves over the foot). Not overlaid on the reference curve.`)
           : text(`Medianas de ${rows[0].n} personas, con el signo de la fuente. Su definición no permite leerlo como grados de extensión sin revisar la convención.`, `Medians of ${rows[0].n} people, source sign preserved. Its definition cannot be read as degrees of extension without checking the convention.`);
     }
     renderCurve();

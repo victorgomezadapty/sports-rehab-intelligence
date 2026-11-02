@@ -21,6 +21,9 @@ gaitReference.then((value) => { gait = value; if (atlas) renderHero(); }).catch(
 // Spanish display names for the original football labels shown in charts; the source label stays in tooltips and tables.
 const LABELS_ES = { 'Hamstring injury': 'Lesión de isquiotibiales', 'Muscle injury': 'Lesión muscular', 'muscular problems': 'Problemas musculares', 'Knee injury': 'Lesión de rodilla', 'Ankle injury': 'Lesión de tobillo', 'Knock': 'Golpe', 'Calf injury': 'Lesión de gemelo', 'Thigh problems': 'Problemas de muslo', 'Cruciate ligament tear': 'Rotura de ligamento cruzado', 'Knee surgery': 'Cirugía de rodilla', 'Shoulder injury': 'Lesión de hombro', 'Femoral fracture': 'Fractura de fémur', 'Cerebral hemorrhage': 'Hemorragia cerebral', 'Cruciate ligament surgery': 'Cirugía de ligamento cruzado', 'Cruciate ligament injury': 'Lesión de ligamento cruzado', 'Cartilage damage': 'Daño de cartílago', 'Patellar tendon rupture': 'Rotura del tendón rotuliano', 'Broken leg': 'Fractura de pierna', 'Achilles tendon rupture': 'Rotura del tendón de Aquiles', 'Knee problems': 'Problemas de rodilla', 'Adductor pain': 'Dolor de aductores' };
 const labelName = (raw) => language === 'es' ? (LABELS_ES[raw] || raw) : raw;
+// Short forms for the phone slope chart only; full names stay in the caption and on wider screens.
+const SHORT_LABELS = { 'Hamstring injury': ['Isquiotibiales', 'Hamstring'], 'Muscle injury': ['L. muscular', 'Muscle injury'], 'muscular problems': ['Prob. muscular', 'Muscle probl.'], 'Knee injury': ['L. rodilla', 'Knee injury'], 'Ankle injury': ['L. tobillo', 'Ankle injury'], 'Cruciate ligament tear': ['Lig. cruzado', 'Cruciate tear'], 'Knee surgery': ['Cir. rodilla', 'Knee surgery'], 'Calf injury': ['L. gemelo', 'Calf injury'] };
+const shortName = (raw) => { const pair = SHORT_LABELS[raw]; if (pair) return pair[language === 'es' ? 0 : 1]; const full = labelName(raw); return full.length > 14 ? `${full.slice(0, 13)}…` : full; };
 const LICENCES_ES = { 'Upstream dataset CC BY 4.0; preserve project attribution notices': 'Datos de origen CC BY 4.0; se conservan los avisos de atribución del proyecto.', 'Primary dataset and dedicated tabular exports CC0; see source rights inventory': 'Datos primarios y exportaciones tabulares CC0; ver el inventario de derechos de la fuente.', 'Derived data CC BY-SA 4.0; preserve source attribution and transformations': 'Datos derivados CC BY-SA 4.0; se conservan la atribución y las transformaciones.' };
 const licence = (value) => language === 'es' ? (LICENCES_ES[value] || value) : value;
 
@@ -162,7 +165,7 @@ function slopeChart(burden) {
   const rightOrder = [...rows].sort((a, b) => Number(b.total_days_out) - Number(a.total_days_out)).map((row) => row.injury_type_raw);
   const compact = narrow();
   // Compact layout (phones): name above its count on the left, days on the right, so text stays legible at 390 px.
-  const W = compact ? 360 : 540; const L = compact ? 196 : 200; const R = compact ? 292 : 340; const step = compact ? 40 : 34;
+  const W = compact ? 360 : 540; const L = compact ? 120 : 200; const R = compact ? 240 : 340; const step = compact ? 44 : 34;
   const y = (index) => 48 + index * step;
   const height = y(rows.length - 1) + 24;
   const highlight = { [leftOrder[0]]: '#f0b98f', [rightOrder[0]]: '#ff8f5c' };
@@ -170,7 +173,7 @@ function slopeChart(burden) {
     const name = row.injury_type_raw; const color = highlight[name] || '#4d5f66'; const strong = Boolean(highlight[name]);
     const ly = y(leftOrder.indexOf(name)); const ry = y(rightOrder.indexOf(name));
     const labels = compact
-      ? `<text x="${L - 10}" y="${ly - 2}" text-anchor="end" class="slope-text">${escape(labelName(name))}</text><text x="${L - 10}" y="${ly + 13}" text-anchor="end" class="slope-count">${number(row.injury_count)}</text><text x="${R + 9}" y="${ry + 5}" class="slope-count">${number(row.total_days_out)}</text>`
+      ? `<text x="${L - 10}" y="${ly - 2}" text-anchor="end" class="slope-text">${escape(shortName(name))}</text><text x="${L - 10}" y="${ly + 13}" text-anchor="end" class="slope-count">${number(row.injury_count)}</text><text x="${R + 10}" y="${ry - 2}" class="slope-text">${escape(shortName(name))}</text><text x="${R + 10}" y="${ry + 13}" class="slope-count">${number(row.total_days_out)}</text>`
       : `<text x="${L - 10}" y="${ly + 4}" text-anchor="end" class="slope-text">${escape(labelName(name))} · ${number(row.injury_count)}</text><text x="${R + 10}" y="${ry + 4}" class="slope-text">${number(row.total_days_out)} · ${escape(labelName(name))}</text>`;
     return `<g class="slope-row${strong ? ' strong' : ''}"><path d="M${L} ${ly}L${R} ${ry}" stroke="${color}" stroke-width="${strong ? 3 : 1.5}" fill="none"/><circle cx="${L}" cy="${ly}" r="${strong ? 5 : 3.5}" fill="${color}"/><circle cx="${R}" cy="${ry}" r="${strong ? 5 : 3.5}" fill="${color}"/>${labels}</g>`;
   }).join('');
