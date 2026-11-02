@@ -8,7 +8,7 @@ let selected = 'ric';
 let selectedDomain = 'running_kinematics';
 let page = 0;
 const pageSize = 8;
-const chartChoices = { ric: 'STRIDE_RATE', competitive_runners: '2', european_football: 'injury_count' };
+const chartChoices = { ric: 'STRIDE_RATE', competitive_runners: '2', european_football: 'compare' };
 const $ = (selector) => document.querySelector(selector);
 const escape = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
 const t = (es, en) => language === 'es' ? es : en;
@@ -86,6 +86,42 @@ function quartilePlot(rows, side) {
   return `<div class="plot" role="img" aria-label="${escape(t('Mediana y cuartiles por lado; valores en la tabla siguiente', 'Median and quartiles by side; values in the following table'))}">${rows.map((row) => `<div class="plot-line"><span class="plot-label">${side(row.side)}</span><svg class="quartile-plot" viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><path d="M${position(row.minimum)} 8H${position(row.maximum)}" stroke="#65797b" stroke-width="1"/><rect x="${position(row.q1)}" y="4" width="${Math.max(.4, position(row.q3) - position(row.q1))}" height="8" fill="#4a6545"/><path d="M${position(row.median)} 2V14" stroke="#bdea85" stroke-width="2"/></svg><span class="plot-value">${number(row.median, 3)}</span></div>`).join('')}<div class="plot-axis"><span>${number(low, 3)}</span><span>${number(high, 3)}</span></div></div>`;
 }
 
+function intervalPlot(rows, names, active) {
+  const max = Math.max(...rows.map((row) => Number(row['AP CI high']))) * 1.1;
+  const x = (value) => 8 + 290 * Number(value) / max;
+  const rowHeight = 58;
+  const ticks = [0, .01, .02, .03, .04].filter((tick) => tick <= max);
+  const body = rows.map((row, index) => {
+    const y = 40 + index * rowHeight;
+    const ap = Number(row['Pooled AP']); const base = Number(row['Label fraction']);
+    const on = index === active;
+    const color = on ? '#9fc7f1' : '#5f7884';
+    const lift = ap / base;
+    return `<g class="ci-row${on ? ' active' : ''}"><text x="0" y="${y - 16}" class="ci-label">${escape(names[index])}</text><path d="M${x(base)} ${y - 16}V${y + 16}" stroke="#e8edf0" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M${x(row['AP CI low'])} ${y}H${x(row['AP CI high'])}" stroke="${color}" stroke-width="${on ? 4 : 2}" stroke-linecap="round"/><circle cx="${x(ap)}" cy="${y}" r="${on ? 7 : 5}" fill="${color}"/><text x="${x(row['AP CI high']) + 8}" y="${y + 4}" class="ci-value">×${number(lift, 2)}</text></g>`;
+  }).join('');
+  const height = 34 + rows.length * rowHeight;
+  const axis = ticks.map((tick) => `<g><path d="M${x(tick)} ${height - 18}V${height - 12}" stroke="#65797b"/><text x="${x(tick)}" y="${height}" text-anchor="middle" class="ci-axis">${number(tick, 2)}</text></g>`).join('');
+  return `<svg class="ci-plot" viewBox="0 0 360 ${height + 6}" role="img" aria-label="${escape(t('Average precision con intervalo de confianza frente a la referencia del azar en tres validaciones; valores en la tabla siguiente', 'Average precision with confidence interval versus the chance reference in three validations; values in the following table'))}">${body}<path d="M8 ${height - 18}H298" stroke="#34434a"/>${axis}</svg><p class="ci-legend"><span class="ci-key dot-key"></span>${t('AP del modelo', 'Model AP')}<span class="ci-key line-key"></span>${t('Azar (fracción positiva)', 'Chance (positive fraction)')}<span class="ci-key lift-key">×</span>${t('veces sobre el azar', 'times over chance')}</p>`;
+}
+
+function slopeChart(burden) {
+  const byCount = [...burden].sort((a, b) => Number(b.injury_count) - Number(a.injury_count));
+  const byDays = [...burden].sort((a, b) => Number(b.total_days_out) - Number(a.total_days_out));
+  const pick = [...new Set([...byCount.slice(0, 5), ...byDays.slice(0, 5)].map((row) => row.injury_type_raw))];
+  const rows = burden.filter((row) => pick.includes(row.injury_type_raw));
+  const leftOrder = [...rows].sort((a, b) => Number(b.injury_count) - Number(a.injury_count)).map((row) => row.injury_type_raw);
+  const rightOrder = [...rows].sort((a, b) => Number(b.total_days_out) - Number(a.total_days_out)).map((row) => row.injury_type_raw);
+  const y = (index) => 48 + index * 34;
+  const height = y(rows.length - 1) + 24;
+  const highlight = { [leftOrder[0]]: '#f0b98f', [rightOrder[0]]: '#ff8f5c' };
+  const lines = rows.map((row) => {
+    const name = row.injury_type_raw; const color = highlight[name] || '#4d5f66'; const strong = Boolean(highlight[name]);
+    const ly = y(leftOrder.indexOf(name)); const ry = y(rightOrder.indexOf(name));
+    return `<g class="slope-row${strong ? ' strong' : ''}"><path d="M200 ${ly}L340 ${ry}" stroke="${color}" stroke-width="${strong ? 3 : 1.5}" fill="none"/><circle cx="200" cy="${ly}" r="${strong ? 5 : 3.5}" fill="${color}"/><circle cx="340" cy="${ry}" r="${strong ? 5 : 3.5}" fill="${color}"/><text x="190" y="${ly + 4}" text-anchor="end" class="slope-text">${escape(name)} · ${number(row.injury_count)}</text><text x="350" y="${ry + 4}" class="slope-text">${number(row.total_days_out)} · ${escape(name)}</text></g>`;
+  }).join('');
+  return `<svg class="slope-plot" viewBox="0 0 540 ${height}" role="img" aria-label="${escape(t('Orden de las etiquetas por número de registros y por días de ausencia acumulados', 'Label ranking by number of records and by summed absence days'))}"><text x="200" y="18" text-anchor="middle" class="slope-head">${t('REGISTROS', 'RECORDS')}</text><text x="340" y="18" text-anchor="middle" class="slope-head">${t('DÍAS DE AUSENCIA', 'DAYS ABSENT')}</text>${lines}</svg><p class="chart-caption">${t(`Cada línea une la posición de una etiqueta en las dos medidas. ${escape(leftOrder[0])} es la más frecuente, pero ${escape(rightOrder[0])} acumula más días con muchos menos registros.`, `Each line joins a label's position under both measures. ${escape(leftOrder[0])} is the most frequent, but ${escape(rightOrder[0])} accumulates more days with far fewer records.`)}</p>`;
+}
+
 function chart() {
   if (selected === 'ric') {
     const feature = chartChoices.ric;
@@ -99,10 +135,11 @@ function chart() {
     const row = atlas.charts.runners_primary_validation[Number(chartChoices.competitive_runners)];
     const ap = Number(row['Pooled AP']);
     const fraction = Number(row['Label fraction']);
-    return `<h3 class="chart-title">${t('Señal predictiva en la muestra de test', 'Ranking signal in the test sample')}</h3><p class="chart-meta">${t('Evaluación primaria guardada · sin reentrenamiento', 'Saved primary evaluation · no retraining')}</p><label for="chart-choice">${t('Validación', 'Validation')}<select id="chart-choice">${protocols.map((name, index) => `<option value="${index}"${String(index) === chartChoices.competitive_runners ? ' selected' : ''}>${name}</option>`).join('')}</select></label>${bars([{ label: 'Average precision', value: ap, display: number(ap, 4) }, { label: t('Fracción positiva', 'Positive fraction'), value: fraction, display: number(fraction, 4), color: '#748994' }], Math.max(ap, fraction) * 1.25, '#9fc7f1')}${table([t('Métrica', 'Metric'), t('Valor', 'Value')], [['Average precision', number(ap, 4)], [t('Fracción positiva', 'Positive fraction'), number(fraction, 4)], [t('Filas de test', 'Test rows'), number(row.Rows)], [t('Etiquetas positivas', 'Positive labels'), number(row.Labels)], ['ROC-AUC', number(row['ROC-AUC'], 4)], ['Brier', number(row.Brier, 5)]] )}<p class="chart-caption">${t('AP es average precision no interpolada. La fracción positiva es una referencia de frecuencia en este test seleccionado, no incidencia prospectiva. Los controles exigían aptitud futura.', 'AP is non-interpolated average precision. The positive fraction is a frequency reference in this selected test, not prospective incidence. Controls required future fitness.')}</p>`;
+    return `<h3 class="chart-title">${t('¿Supera el modelo al azar?', 'Does the model beat chance?')}</h3><p class="chart-meta">${t('Evaluación primaria guardada · sin reentrenamiento', 'Saved primary evaluation · no retraining')}</p><label for="chart-choice">${t('Validación', 'Validation')}<select id="chart-choice">${protocols.map((name, index) => `<option value="${index}"${String(index) === chartChoices.competitive_runners ? ' selected' : ''}>${name}</option>`).join('')}</select></label>${intervalPlot(atlas.charts.runners_primary_validation, protocols, Number(chartChoices.competitive_runners))}${table([t('Métrica', 'Metric'), t('Valor', 'Value')], [['Average precision', number(ap, 4)], [t('Fracción positiva', 'Positive fraction'), number(fraction, 4)], [t('Filas de test', 'Test rows'), number(row.Rows)], [t('Etiquetas positivas', 'Positive labels'), number(row.Labels)], ['ROC-AUC', number(row['ROC-AUC'], 4)], ['Brier', number(row.Brier, 5)]] )}<p class="chart-caption">${t('Punto: AP del modelo con su intervalo de confianza. Línea discontinua: AP esperada al azar (fracción positiva). Si el intervalo cruza la línea, la señal no se distingue con claridad del azar; es una lectura visual, no una prueba formal. AP es average precision no interpolada. La fracción positiva es una referencia de frecuencia en este test seleccionado, no incidencia prospectiva. Los controles exigían aptitud futura.', 'Dot: model AP with its confidence interval. Dashed line: AP expected by chance (positive fraction). If the interval crosses the line, the signal is not clearly separated from chance; this is a visual reading, not a formal test. AP is non-interpolated average precision. The positive fraction is a frequency reference in this selected test, not prospective incidence. Controls required future fitness.')}</p>`;
   }
-  const options = { injury_count: t('Frecuencia registrada', 'Recorded frequency'), median_days_out: t('Mediana de duración', 'Median duration'), total_days_out: t('Suma de días por registro', 'Sum of episode-days') };
+  const options = { compare: t('Frecuencia frente a días de ausencia', 'Frequency versus days absent'), injury_count: t('Frecuencia registrada', 'Recorded frequency'), median_days_out: t('Mediana de duración', 'Median duration'), total_days_out: t('Suma de días por registro', 'Sum of episode-days') };
   const metric = chartChoices.european_football;
+  if (metric === 'compare') return `<h3 class="chart-title">${t('Lo más frecuente no es lo que más días cuesta', 'The most frequent is not the most costly in days')}</h3><p class="chart-meta">${t('registros frente a días-episodio / vista de registros originales', 'records versus episode-days / original-record view')}</p><label for="chart-choice">${t('Medida', 'Measure')}<select id="chart-choice">${Object.entries(options).map(([key, label]) => `<option value="${key}"${key === metric ? ' selected' : ''}>${label}</option>`).join('')}</select></label>${slopeChart(atlas.charts.football_burden)}`;
   const rows = [...atlas.charts.football_burden].sort((a, b) => Number(b[metric]) - Number(a[metric])).slice(0, 5);
   const units = metric === 'injury_count' ? t('registros', 'records') : metric === 'median_days_out' ? t('días / registro', 'days / record') : t('días-episodio', 'episode-days');
   return `<h3 class="chart-title">${t('Etiquetas originales · cinco primeras', 'Original labels · top five')}</h3><p class="chart-meta">${escape(units)} / ${t('vista de registros originales', 'original-record view')}</p><label for="chart-choice">${t('Medida', 'Measure')}<select id="chart-choice">${Object.entries(options).map(([key, label]) => `<option value="${key}"${key === metric ? ' selected' : ''}>${label}</option>`).join('')}</select></label>${bars(rows.map((row) => ({ label: row.injury_type_raw, value: Number(row[metric]), display: number(row[metric], metric === 'median_days_out' ? 1 : 0) })), Math.max(...rows.map((row) => Number(row[metric]))) * 1.05, '#f0b98f')}${table([t('Etiqueta', 'Label'), 'n', options[metric]], rows.map((row) => [row.injury_type_raw, number(row.injury_count), number(row[metric], metric === 'median_days_out' ? 1 : 0)]))}${table([t('Vista de sensibilidad', 'Sensitivity view'), t('Registros', 'Records')], atlas.charts.football_duplicate_sensitivity.map((row, index) => [index === 0 ? t('Fuente original', 'Source records') : t('Colapso candidato', 'Candidate collapsing'), number(row.record_count)]))}<p class="chart-caption">${t('Las ausencias incluyen etiquetas musculoesqueléticas, enfermedad y otros motivos. El colapso candidato no adjudica episodios. Las sumas pueden repetir días y partidos. Consulta n antes de interpretar medianas poco frecuentes.', 'Absences include musculoskeletal labels, illness and other reasons. Candidate collapsing does not adjudicate episodes. Sums can repeat days and matches. Check n before interpreting rare-label medians.')}</p>`;
