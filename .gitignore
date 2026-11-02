@@ -7,5 +7,6 @@ dist/
 .env*
 reports/qa/
 delivery/kaggle/*.zip
+!delivery/kaggle/source_snapshots.zip
 
 .vercel
