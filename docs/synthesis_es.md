@@ -8,9 +8,9 @@ La nueva figura de movimiento en la web es una animación didáctica creada para
 
 Fuente de resultados: `data/source-snapshots/Running_Injury_Clinic/reports/tables/pilot_descriptive_summary.csv`. Descriptor científico: https://doi.org/10.1038/s41597-024-04011-7 .
 
-## 2. La historia de entrenamiento aportó una señal de ordenación modesta
+## 2. La historia de entrenamiento supera al azar por muy poco
 
-En la evaluación primaria de atletas nuevos y periodo futuro de Competitive Runners, el test contiene 7.596 filas y 122 etiquetas positivas. Average precision (AP) fue 0,0199906 frente a una fracción positiva de 0,0160611; ROC-AUC fue 0,545594. Son resultados guardados de ese test seleccionado, no una nueva estimación del atlas. No establecen utilidad clínica, incidencia ni prevención. Separar tiempo y atleta no elimina la selección de controles basada en aptitud futura.
+En la evaluación primaria de atletas nuevos y periodo futuro de Competitive Runners, el test contiene 7.596 filas y 122 etiquetas positivas. Average precision (AP) fue 0,0199906 frente a una fracción positiva de 0,0160611; ROC-AUC fue 0,545594. El IC pareado por atleta de AP menos azar fue 0,0020 a 0,0270 y excluye el cero: supera al azar por muy poco; con una AUC de 0,546 no sirve para uso clínico. Son resultados guardados de ese test seleccionado, no una nueva estimación del atlas. No establecen utilidad clínica, incidencia ni prevención. Separar tiempo y atleta no elimina la selección de controles basada en aptitud futura.
 
 Fuente de resultados: `data/source-snapshots/Competitive_Runners/competitive-runners-injury-risk/reports/phase_02/tables/primary_summary.csv`. Estudio original: https://doi.org/10.1123/ijspp.2020-0518 ; errata: https://doi.org/10.1123/ijspp.2024-0251 .
 

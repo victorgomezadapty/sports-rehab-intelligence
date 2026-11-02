@@ -8,7 +8,7 @@ El descriptor de Ferber y colaboradores documenta 1.798 personas con tareas de m
 
 ## Entrenamiento: el tiempo importa, también la selección
 
-Competitive Runners analiza 74 atletas y 42.766 eventos seleccionados de la representación Day. El diseño original y su documentación corregida deben interpretarse juntos [3–5]. La separación temporal y por atleta ayuda a examinar generalización, pero no elimina la selección de controles que exige aptitud futura. En la evaluación primaria de atletas nuevos y futuro, AP es aproximadamente 0,0200 frente a una fracción positiva de 0,0161 en ese test; el resultado pertenece a esa muestra seleccionada. No establece incidencia prospectiva, prevención ni probabilidad clínica individual.
+Competitive Runners analiza 74 atletas y 42.766 eventos seleccionados de la representación Day. El diseño original y su documentación corregida deben interpretarse juntos [3–5]. La separación temporal y por atleta ayuda a examinar generalización, pero no elimina la selección de controles que exige aptitud futura. En la evaluación primaria de atletas nuevos y futuro, AP es aproximadamente 0,0200 frente a una fracción positiva de 0,0161 en ese test, y el IC pareado de AP menos azar (0,0020 a 0,0270) excluye el cero. Supera al azar por muy poco; con una AUC de 0,546 no sirve para uso clínico. El resultado pertenece a esa muestra seleccionada. No establece incidencia prospectiva, prevención ni probabilidad clínica individual.
 
 ## Consecuencias: frecuencia, severidad y carga responden preguntas distintas
 
