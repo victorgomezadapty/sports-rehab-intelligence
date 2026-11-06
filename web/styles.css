@@ -63,3 +63,5 @@ details.mobile-collapse>summary{display:none}
 @media(max-width:480px){.region-joint,.region-value,.region-mean,.region-head{font-size:13px}.ci-label,.dist-label{font-size:14px}.slope-head{font-size:12.5px}}
 .mini-text{font-size:9.5px}.region-chart svg{max-width:460px;display:block;margin-inline:auto}
 @media(max-width:480px){.mini-text{font-size:11.5px}}
+.header nav{min-width:0;overflow-x:auto;scrollbar-width:none}
+a.experience-link{font-weight:650;text-decoration:underline;text-decoration-color:#bdea85;text-underline-offset:4px}
