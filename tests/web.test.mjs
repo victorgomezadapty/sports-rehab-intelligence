@@ -36,7 +36,11 @@ test('the three component studies and research resources are linked', () => {
     assert(evidence.includes(`href="${route}"`), route);
   }
   assert(app.includes('class="experience-link" href="/studies/${content.slug}/"'));
-  assert(app.includes('https://${content.slug}.vercel.app'));
+  assert(app.includes('href="https://sports-rehab-intelligence.vercel.app/studies/${content.slug}/"'));
+  for (const host of ['running-injury-clinic.vercel.app', 'competitive-runners-injury-risk.vercel.app', 'european-football-injuries.vercel.app']) {
+    assert(!index.includes(host), host);
+    assert(!app.includes(host), host);
+  }
   for (const host of ['github.com', 'kaggle.com', 'victor-gomez-portfolio.vercel.app']) assert(index.includes(host));
   assert(index.includes('id="motion"'));
   assert(read('web/styles.css').includes('prefers-reduced-motion'));

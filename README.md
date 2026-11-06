@@ -15,9 +15,9 @@ This project brings three independent studies together as a reproducible **evide
 
 | Study | Contribution | Reviewed evidence and limits |
 | --- | --- | --- |
-| [Running Injury Clinic](https://running-injury-clinic.vercel.app) · [code](https://github.com/victorgomezadapty/running-injury-clinic) | Movement and current-status metadata | 1,402 people with running metadata; 30-person pilot, 13 variables per side; local official event/cycle validation pending |
-| [Competitive Runners](https://competitive-runners-injury-risk.vercel.app) · [code](https://github.com/victorgomezadapty/competitive-runners-injury-risk) | Training histories and selected injury labels | 74 athletes, 42,766 Day events, 583 retained labels; saved temporal/athlete validation; future-conditioned controls |
-| [European Football Injuries](https://european-football-injuries.vercel.app) · [code](https://github.com/victorgomezadapty/european-football-injuries) | Recorded absence and consequences | 15,603 records; duration, match loss and repeated-interval sensitivity; no complete eligible-exposure denominator or verified clinical return |
+| [Running Injury Clinic](https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/) · [code](https://github.com/victorgomezadapty/running-injury-clinic) | Movement and current-status metadata | 1,402 people with running metadata; 30-person pilot, 13 variables per side; local official event/cycle validation pending |
+| [Competitive Runners](https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/) · [code](https://github.com/victorgomezadapty/competitive-runners-injury-risk) | Training histories and selected injury labels | 74 athletes, 42,766 Day events, 583 retained labels; saved temporal/athlete validation; future-conditioned controls |
+| [European Football Injuries](https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/) · [code](https://github.com/victorgomezadapty/european-football-injuries) | Recorded absence and consequences | 15,603 records; duration, match loss and repeated-interval sensitivity; no complete eligible-exposure denominator or verified clinical return |
 
 The framework **movement → training → injury → consequences** describes research questions, not an observed causal chain across these cohorts.
 
