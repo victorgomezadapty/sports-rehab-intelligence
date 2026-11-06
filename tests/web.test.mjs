@@ -14,10 +14,12 @@ test('the atlas retains three source-specific outcomes and all original catalogu
 });
 
 test('all relative public links and download targets resolve inside the static site', () => {
+  const routes = new Set(JSON.parse(read('studies/sources.json')).studies.map((study) => `/${study.route}/`));
   for (const file of ['web/index.html', 'web/evidence.html']) {
     for (const [, target] of read(file).matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (/^(https?:|#|data:)/.test(target) || target === '/') continue;
       if (target.startsWith('/#')) continue;
+      if (routes.has(target)) continue;
       assert(existsSync(new URL(`web/${target}`, root)), `${file}: ${target}`);
     }
   }
@@ -26,10 +28,19 @@ test('all relative public links and download targets resolve inside the static s
 test('the three component studies and research resources are linked', () => {
   const app = read('web/app.js');
   const index = read('web/index.html');
+  const evidence = read('web/evidence.html');
+  const routes = JSON.parse(read('studies/sources.json')).studies.map((study) => `/${study.route}/`);
   for (const slug of ['running-injury-clinic', 'competitive-runners-injury-risk', 'european-football-injuries']) assert(app.includes(slug));
+  for (const route of routes) {
+    assert(index.includes(`href="${route}"`), route);
+    assert(evidence.includes(`href="${route}"`), route);
+  }
+  assert(app.includes('class="experience-link" href="/studies/${content.slug}/"'));
+  assert(app.includes('https://${content.slug}.vercel.app'));
   for (const host of ['github.com', 'kaggle.com', 'victor-gomez-portfolio.vercel.app']) assert(index.includes(host));
   assert(index.includes('id="motion"'));
   assert(read('web/styles.css').includes('prefers-reduced-motion'));
+  assert(read('web/studies/hub.css').includes('prefers-reduced-motion'));
 });
 
 test('chart inputs preserve denominators and sensitivity views', () => {

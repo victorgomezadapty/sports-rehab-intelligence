@@ -1,0 +1,25 @@
+.sri-hub{position:sticky;top:0;z-index:80;display:flex;align-items:center;gap:14px;min-height:48px;padding:8px 18px;background:#101a20;color:#e7eeea;border-bottom:1px solid #24343b;font:13px/1.4 "Segoe UI",sans-serif}
+.sri-hub a{color:#d5e4dc;text-decoration:none}
+.sri-hub a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.sri-hub-brand{font-weight:700;letter-spacing:.08em;color:#bdea85!important;flex:0 0 auto}
+.sri-hub-links{display:flex;gap:14px;flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+.sri-hub-links a{white-space:nowrap;padding:4px 0}
+.sri-hub-links a[aria-current="page"]{color:#fff;box-shadow:inset 0 -2px 0 #bdea85}
+.sri-hub-note{margin:0;flex:1 1 280px;color:#9fb0b4;font-size:12px}
+.sri-hub-note a{color:#cfe3c2}
+.sri-hub button{flex:0 0 auto;border:1px solid #3d5258;background:transparent;color:#e7eeea;border-radius:999px;min-width:42px;min-height:32px;padding:0 10px}
+.sri-hub button:hover{border-color:#bdea85;color:#fff}
+html{scroll-padding-top:calc(110px + var(--sri-hub-offset, 48px))}
+body:has(.sri-hub) > header.site-header,
+body:has(.sri-hub) > header.nav,
+body:has(.sri-hub) > .skip + header.header,
+body:has(.sri-hub) > a.skip + header.header,
+body:has(.sri-hub) > header.header{top:var(--sri-hub-offset, 48px)!important}
+body:has(.sri-hub) .mobile-nav{top:calc(66px + var(--sri-hub-offset, 48px))!important}
+@media(max-width:800px){
+  .sri-hub{flex-wrap:wrap;align-items:flex-start}
+  .sri-hub-note{flex-basis:100%;order:4}
+}
+@media(prefers-reduced-motion:reduce){
+  .sri-hub,.sri-hub *{transition:none!important;animation:none!important}
+}

@@ -1,0 +1,35 @@
+{
+  "note": "Pinned interactive frontends. Scientific repositories stay independent. The site build copies only the listed directory into dist and does not fuse datasets or clinical results.",
+  "studies": [
+    {
+      "id": "running-injury-clinic",
+      "repo": "running-injury-clinic",
+      "url": "https://github.com/victorgomezadapty/running-injury-clinic.git",
+      "commit": "288af556439922867a0bff1f127c7a70c9e18be1",
+      "path": "site",
+      "route": "studies/running-injury-clinic",
+      "label_es": "Clínica",
+      "label_en": "Clinic"
+    },
+    {
+      "id": "competitive-runners-injury-risk",
+      "repo": "competitive-runners-injury-risk",
+      "url": "https://github.com/victorgomezadapty/competitive-runners-injury-risk.git",
+      "commit": "7080b0603033bb940da1b62da4dde4424e6d5312",
+      "path": "web",
+      "route": "studies/competitive-runners-injury-risk",
+      "label_es": "Corredores",
+      "label_en": "Runners"
+    },
+    {
+      "id": "european-football-injuries",
+      "repo": "european-football-injuries",
+      "url": "https://github.com/victorgomezadapty/european-football-injuries.git",
+      "commit": "17db556d14c1d8bccc155fce1509bce0e3801ab3",
+      "path": "web",
+      "route": "studies/european-football-injuries",
+      "label_es": "Fútbol",
+      "label_en": "Football"
+    }
+  ]
+}
