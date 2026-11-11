@@ -8,10 +8,9 @@ const spanishPath = (pathname = location.pathname) => pathname === '/es' || path
 const toEnglishPath = (pathname) => pathname === '/es' || pathname === '/es/' ? '/' : pathname.startsWith('/es/') ? (pathname.slice(3) || '/') : (pathname || '/');
 const toSpanishPath = (pathname) => { const bare = toEnglishPath(pathname); return bare === '/' ? '/es/' : `/es${bare.startsWith('/') ? bare : `/${bare}`}`; };
 let language = spanishPath() ? 'es' : 'en';
+// Path chooses the language. Do not send `/` to `/es/` from a saved preference.
 try {
-  const stored = localStorage.getItem('sri-language');
-  if (!spanishPath() && stored === 'es') location.replace(toSpanishPath(location.pathname) + location.hash);
-  else if (!spanishPath() && stored !== 'en') localStorage.setItem('sri-language', 'en');
+  if (!spanishPath()) localStorage.setItem('sri-language', 'en');
 } catch {}
 let atlas;
 let selected = 'ric';
@@ -118,8 +117,8 @@ function setLanguage() {
   if ($('#runner-title')) $('#runner-title').textContent = t('Esquema animado de un corredor', 'Animated runner diagram');
   if ($('#runner-desc')) $('#runner-desc').textContent = t('Corredor animado con los ángulos medios publicados de cadera, rodilla y tobillo a 2,5 m/s (Fukuchi y colaboradores, 2017). Pelvis, tronco, brazos y altura de vuelo son ilustrativos.', 'Runner animated with published mean hip, knee and ankle angles at 2.5 m/s (Fukuchi et al., 2017). Pelvis, trunk, arms and flight height are illustrative.');
   $('#motion')?.setAttribute('aria-label', t('Pausar o reanudar las animaciones', 'Pause or resume animations'));
-  document.title = t('Sports Rehab Intelligence — Tres estudios, una visión conectada', 'Sports Rehab Intelligence — Three studies, one connected perspective');
-  if (document.body.classList.contains('evidence-body')) document.title = t('Evidencia y métodos — Sports Rehab Intelligence', 'Evidence and methods — Sports Rehab Intelligence');
+  document.title = t('Sports Rehab Intelligence · Tres estudios, una visión conectada', 'Sports Rehab Intelligence · Three studies, one connected perspective');
+  if (document.body.classList.contains('evidence-body')) document.title = t('Evidencia y métodos · Sports Rehab Intelligence', 'Evidence and methods · Sports Rehab Intelligence');
   updateMotionText();
   if (atlas) render();
 }

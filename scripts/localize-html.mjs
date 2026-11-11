@@ -12,11 +12,11 @@ const ATLAS = {
     esPath: '/es/',
     og: true,
     en: {
-      title: 'Sports Rehab Intelligence \u2014 Three studies, one connected perspective',
+      title: 'Sports Rehab Intelligence · Three studies, one connected perspective',
       description: 'Movement. Training. Injury consequences. Three independent studies, one evidence atlas.',
     },
     es: {
-      title: 'Sports Rehab Intelligence \u2014 Tres estudios, una visión conectada',
+      title: 'Sports Rehab Intelligence · Tres estudios, una visión conectada',
       description: 'Un atlas de evidencia que reúne biomecánica, entrenamiento y consecuencias de la lesión. Tres estudios independientes, una línea de investigación reproducible.',
     },
   },
@@ -25,11 +25,11 @@ const ATLAS = {
     esPath: '/es/evidence.html',
     og: false,
     en: {
-      title: 'Evidence and methods \u2014 Sports Rehab Intelligence',
+      title: 'Evidence and methods · Sports Rehab Intelligence',
       description: 'The question: which movement, training and injury-consequence dimensions are observed, and which data and validation are needed to connect them?',
     },
     es: {
-      title: 'Evidencia y métodos \u2014 Sports Rehab Intelligence',
+      title: 'Evidencia y métodos · Sports Rehab Intelligence',
       description: 'Discusión, métodos, atribución y referencias primarias del atlas Sports Rehab Intelligence.',
     },
   },

@@ -14,11 +14,11 @@ test('english and spanish atlas documents keep both languages and the right prev
   assert.equal(localizeAtlasHtml(english, 'en', 'home'), english);
   assert.match(english, /<html\b[^>]*\slang="en"/);
   assert.match(spanish, /<html\b[^>]*\slang="es"/);
-  assert.match(english, /<title>Sports Rehab Intelligence — Three studies, one connected perspective<\/title>/);
-  assert.match(spanish, /<title>Sports Rehab Intelligence — Tres estudios, una visión conectada<\/title>/);
-  assert.match(english, /property="og:title" content="Sports Rehab Intelligence — Three studies, one connected perspective"/);
+  assert.match(english, /<title>Sports Rehab Intelligence · Three studies, one connected perspective<\/title>/);
+  assert.match(spanish, /<title>Sports Rehab Intelligence · Tres estudios, una visión conectada<\/title>/);
+  assert.match(english, /property="og:title" content="Sports Rehab Intelligence · Three studies, one connected perspective"/);
   assert.match(english, /property="og:description" content="Movement\. Training\. Injury consequences\. Three independent studies, one evidence atlas\."/);
-  assert.match(spanish, /property="og:title" content="Sports Rehab Intelligence — Tres estudios, una visión conectada"/);
+  assert.match(spanish, /property="og:title" content="Sports Rehab Intelligence · Tres estudios, una visión conectada"/);
   assert.match(spanish, /property="og:description" content="Un atlas de evidencia que reúne biomecánica, entrenamiento y consecuencias de la lesión\. Tres estudios independientes, una línea de investigación reproducible\."/);
   assert.match(english, /property="og:image" content="https:\/\/sports-rehab-intelligence\.vercel\.app\/cover\.svg"/);
   assert.match(english, /hreflang="en" href="https:\/\/sports-rehab-intelligence\.vercel\.app\/"/);
@@ -33,7 +33,7 @@ test('english and spanish atlas documents keep both languages and the right prev
   assert.match(spanish, /id="language"[^>]*href="\/"[^>]*>EN<\/a>/);
   assert.match(english, /Animated runner diagram/);
   assert.match(spanish, /Esquema animado de un corredor/);
-  assert.equal(looksSpanish('Sports Rehab Intelligence — Three studies, one connected perspective'), false);
+  assert.equal(looksSpanish('Sports Rehab Intelligence · Three studies, one connected perspective'), false);
   assert.equal(looksSpanish('Tres estudios, una visión conectada'), true);
   assert.match(spanish, /src="\/app\.js"/);
   assert.match(spanish, /href="\/es\/evidence\.html"/);
@@ -48,9 +48,9 @@ test('evidence keeps its existing english and spanish titles', () => {
   const english = localizeAtlasHtml(source, 'en', 'evidence');
   const spanish = localizeAtlasHtml(source, 'es', 'evidence');
   assert.match(english, /<html\b[^>]*\slang="en"/);
-  assert.match(english, /<title>Evidence and methods — Sports Rehab Intelligence<\/title>/);
+  assert.match(english, /<title>Evidence and methods · Sports Rehab Intelligence<\/title>/);
   assert.match(english, /name="description" content="The question: which movement, training and injury-consequence dimensions are observed, and which data and validation are needed to connect them\?"/);
-  assert.match(spanish, /<title>Evidencia y métodos — Sports Rehab Intelligence<\/title>/);
+  assert.match(spanish, /<title>Evidencia y métodos · Sports Rehab Intelligence<\/title>/);
   assert.match(spanish, /Discusión, métodos, atribución y referencias primarias/);
   assert.match(english, /href="\/es\/evidence\.html"/);
   assert.match(spanish, /href="\/evidence\.html"/);
