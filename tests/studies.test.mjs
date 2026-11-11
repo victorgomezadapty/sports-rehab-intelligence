@@ -43,6 +43,38 @@ test('pinned study frontends mount as separate routes without fused data', { tim
     const provenance = JSON.parse(await readFile(path.join(siteDir, 'studies/provenance.json'), 'utf8'));
     assert.deepEqual(provenance.studies.map((study) => study.route), manifest.studies.map((study) => study.route));
     for (const study of manifest.studies) assert.equal(study.datasets_fused, false);
+    for (const study of manifest.studies) {
+      const indexPath = path.join(siteDir, study.route.replace(/^\//, ''), 'index.html');
+      const spanishPath = path.join(siteDir, 'es', study.route.replace(/^\//, ''), 'index.html');
+      const index = await readFile(indexPath, 'utf8');
+      const spanish = await readFile(spanishPath, 'utf8');
+      assert.match(index, /<html\b[^>]*\slang="en"/i, study.route);
+      assert.match(spanish, /<html\b[^>]*\slang="es"/i, study.route);
+      assert.doesNotMatch(index, /<html\b[^>]*\slang="es"/i, study.route);
+      const ogTitle = index.match(/property="og:title" content="([^"]*)"/);
+      if (ogTitle) assert.equal(/\b(historial|coste|registros|análisis|analisis)\b/i.test(ogTitle[1]), false, ogTitle[1]);
+      const spanishOg = spanish.match(/property="og:title" content="([^"]*)"/);
+      if (spanishOg) assert.equal(/\b(historial|coste|El )\b/.test(spanishOg[1]) || /[áéíóúñ]/i.test(spanishOg[1]), true, spanishOg[1]);
+    }
+    const runnersApp = await readFile(path.join(siteDir, 'studies/competitive-runners-injury-risk/app.js'), 'utf8');
+    const footballApp = await readFile(path.join(siteDir, 'studies/european-football-injuries/app.js'), 'utf8');
+    assert.match(runnersApp, /documentElement\.lang/);
+    assert.match(footballApp, /documentElement\.lang/);
+    const football = await readFile(path.join(siteDir, 'studies/european-football-injuries/index.html'), 'utf8');
+    assert.match(football, /The cost of being absent/);
+    assert.doesNotMatch(football, /property="og:title" content="[^"]*coste/);
+    const footballEs = await readFile(path.join(siteDir, 'es/studies/european-football-injuries/index.html'), 'utf8');
+    assert.match(footballEs, /El coste de no estar/);
+    const runners = await readFile(path.join(siteDir, 'studies/competitive-runners-injury-risk/index.html'), 'utf8');
+    assert.match(runners, /The history comes before/);
+    assert.doesNotMatch(runners, /property="og:title" content="[^"]*historial/);
+    const clinicEs = await readFile(path.join(siteDir, 'es/studies/running-injury-clinic/index.html'), 'utf8');
+    assert.match(clinicEs, /Biomecánica y fenotipado/);
+    const footballEvidence = await readFile(path.join(siteDir, 'studies/european-football-injuries/evidence.html'), 'utf8');
+    const hiddenSpanish = footballEvidence.match(/<div class="lang-content"[^>]*data-content-lang="es"[^>]*>/);
+    const visibleEnglish = footballEvidence.match(/<div class="lang-content"[^>]*data-content-lang="en"[^>]*>/);
+    assert.ok(hiddenSpanish && /\shidden(?:\s|>)/.test(hiddenSpanish[0]));
+    assert.ok(visibleEnglish && !/\shidden(?:\s|>)/.test(visibleEnglish[0]));
   } finally {
     await rm(siteDir, { recursive: true, force: true });
   }

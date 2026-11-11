@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { extractPairs, loadCopyEs, localizeDocument, preferHtmlLanguage, studyPaths } from './localize-html.mjs';
 
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 const SKIP = new Set(['vercel.json', 'package.json', 'package-lock.json', 'test.mjs', 'build.mjs', 'evidence.template.html']);
@@ -78,7 +79,7 @@ function hubBar(study, studies) {
     ...studies.map((item) => [`/${item.route}/`, item.label_es, item.label_en, item.id === study.id]),
   ];
   const anchors = links.map(([href, es, en, current]) => `<a href="${href}"${current ? ' aria-current="page"' : ''} data-sri-es="${es}" data-sri-en="${en}">${es}</a>`).join('');
-  return `<div class="sri-hub" data-study="${study.id}"><a class="sri-hub-brand" href="/">SRI</a><div class="sri-hub-links">${anchors}</div><p class="sri-hub-note"><span data-sri-es="Estudio independiente, commit ${short}. Sus datos no se fusionan con los demás." data-sri-en="Independent study, commit ${short}. Its data is not fused with the others.">Estudio independiente, commit ${short}. Sus datos no se fusionan con los demás.</span> <a href="https://github.com/victorgomezadapty/${study.repo}/tree/${study.commit}">GitHub</a></p><button type="button" data-sri-lang aria-label="Switch to English">EN</button></div>`;
+  return `<div class="sri-hub" data-study="${study.id}"><a class="sri-hub-brand" href="/">SRI</a><div class="sri-hub-links">${anchors}</div><p class="sri-hub-note"><span data-sri-es="Estudio independiente, commit ${short}. Sus datos no se fusionan con los demás." data-sri-en="Independent study, commit ${short}. Its data is not fused with the others.">Estudio independiente, commit ${short}. Sus datos no se fusionan con los demás.</span> <a href="https://github.com/victorgomezadapty/${study.repo}/tree/${study.commit}">GitHub</a></p><a data-sri-lang href="/es/${study.route}/" aria-label="Cambiar a español">ES</a></div>`;
 }
 
 function injectHub(html, study, studies) {
@@ -164,6 +165,24 @@ export async function loadSources(root = repoRoot) {
   return sources;
 }
 
+async function localizeStudy(siteDir, destination, study, files) {
+  let js = '';
+  for (const relative of files) {
+    if (relative.endsWith('.js')) js += await readFile(path.join(destination, relative), 'utf8');
+  }
+  const pairs = extractPairs(js);
+  const copyEs = loadCopyEs(js);
+  const dict = copyEs ? { es: copyEs } : null;
+  for (const relative of [...files].filter((file) => file.endsWith('.html'))) {
+    const html = await readFile(path.join(destination, relative), 'utf8');
+    const paths = studyPaths(study.route, relative);
+    await writeFile(path.join(destination, relative), localizeDocument(html, { lang: 'en', ...paths, pairs, dict, social: 'study' }));
+    const spanishFile = path.join(siteDir, 'es', study.route, relative);
+    await mkdir(path.dirname(spanishFile), { recursive: true });
+    await writeFile(spanishFile, localizeDocument(html, { lang: 'es', ...paths, pairs, dict, social: 'study' }));
+  }
+}
+
 export async function embedStudies({ siteDir, cacheRoot = path.join(repoRoot, '.study-cache'), root = repoRoot } = {}) {
   const sources = await loadSources(root);
   const provenance = [];
@@ -186,7 +205,14 @@ export async function embedStudies({ siteDir, cacheRoot = path.join(repoRoot, '.
       const full = path.join(destination, relative);
       await writeFile(full, injectHub(await readFile(full, 'utf8'), study, sources.studies));
     }
+    for (const relative of [...files].filter((file) => file.endsWith('.js'))) {
+      const full = path.join(destination, relative);
+      const original = await readFile(full, 'utf8');
+      const patched = preferHtmlLanguage(original);
+      if (patched !== original) await writeFile(full, patched);
+    }
     await assertExperience(study, destination);
+    await localizeStudy(siteDir, destination, study, files);
     provenance.push({
       id: study.id,
       repo: study.repo,

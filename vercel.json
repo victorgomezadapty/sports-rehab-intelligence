@@ -2,6 +2,18 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
+  "redirects": [
+    { "source": "/en", "destination": "/", "permanent": true },
+    { "source": "/en/", "destination": "/", "permanent": true },
+    { "source": "/en/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/", "has": [{ "type": "query", "key": "lang", "value": "es" }], "destination": "/es/", "permanent": false },
+    { "source": "/evidence.html", "has": [{ "type": "query", "key": "lang", "value": "es" }], "destination": "/es/evidence.html", "permanent": false },
+    { "source": "/studies/:path*", "has": [{ "type": "query", "key": "lang", "value": "es" }], "destination": "/es/studies/:path*", "permanent": false },
+    { "source": "/es", "destination": "/es/", "permanent": true },
+    { "source": "/es/", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/", "permanent": false },
+    { "source": "/es/evidence.html", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/evidence.html", "permanent": false },
+    { "source": "/es/studies/:path*", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/studies/:path*", "permanent": false }
+  ],
   "headers": [{"source": "/(.*)", "headers": [
     {"key": "X-Content-Type-Options", "value": "nosniff"},
     {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},

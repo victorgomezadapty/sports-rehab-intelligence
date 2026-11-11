@@ -4,8 +4,14 @@ import { summarizeAtlas, injuryBurden, regionBurden } from './synthesis.js';
 const PAIRED_AP = { low: 0.0020360947503472045, high: 0.0270284569281864 };
 import { createMovementExplorer, gaitReference } from './movement.js';
 
-let language = 'es';
-try { language = localStorage.getItem('sri-language') === 'en' ? 'en' : 'es'; } catch {}
+const spanishPath = (pathname = location.pathname) => pathname === '/es' || pathname.startsWith('/es/');
+const toEnglishPath = (pathname) => pathname === '/es' || pathname === '/es/' ? '/' : pathname.startsWith('/es/') ? (pathname.slice(3) || '/') : (pathname || '/');
+const toSpanishPath = (pathname) => { const bare = toEnglishPath(pathname); return bare === '/' ? '/es/' : `/es${bare.startsWith('/') ? bare : `/${bare}`}`; };
+let language = spanishPath() ? 'es' : 'en';
+// Path chooses the language. Do not send `/` to `/es/` from a saved preference.
+try {
+  if (!spanishPath()) localStorage.setItem('sri-language', 'en');
+} catch {}
 let atlas;
 let selected = 'ric';
 let selectedDomain = 'running_kinematics';
@@ -111,8 +117,8 @@ function setLanguage() {
   if ($('#runner-title')) $('#runner-title').textContent = t('Esquema animado de un corredor', 'Animated runner diagram');
   if ($('#runner-desc')) $('#runner-desc').textContent = t('Corredor animado con los ángulos medios publicados de cadera, rodilla y tobillo a 2,5 m/s (Fukuchi y colaboradores, 2017). Pelvis, tronco, brazos y altura de vuelo son ilustrativos.', 'Runner animated with published mean hip, knee and ankle angles at 2.5 m/s (Fukuchi et al., 2017). Pelvis, trunk, arms and flight height are illustrative.');
   $('#motion')?.setAttribute('aria-label', t('Pausar o reanudar las animaciones', 'Pause or resume animations'));
-  document.title = t('Sports Rehab Intelligence — Tres estudios, una visión conectada', 'Sports Rehab Intelligence — Three studies, one connected perspective');
-  if (document.body.classList.contains('evidence-body')) document.title = t('Evidencia y métodos — Sports Rehab Intelligence', 'Evidence and methods — Sports Rehab Intelligence');
+  document.title = t('Sports Rehab Intelligence · Tres estudios, una visión conectada', 'Sports Rehab Intelligence · Three studies, one connected perspective');
+  if (document.body.classList.contains('evidence-body')) document.title = t('Evidencia y métodos · Sports Rehab Intelligence', 'Evidence and methods · Sports Rehab Intelligence');
   updateMotionText();
   if (atlas) render();
 }
@@ -299,7 +305,11 @@ function renderReferences() {
 }
 
 function render() { renderHero(); renderRegions(); renderSynthesis(); renderStudy(); renderMatrix(); renderCatalog(); renderReferences(); movementExplorer?.update(atlas, language); }
-$('#language')?.addEventListener('click', () => { language = language === 'es' ? 'en' : 'es'; try { localStorage.setItem('sri-language', language); } catch {} setLanguage(); });
+$('#language')?.addEventListener('click', () => {
+  const next = language === 'es' ? 'en' : 'es';
+  try { localStorage.setItem('sri-language', next); } catch {}
+  if (!$('#language')?.getAttribute('href')) { language = next; setLanguage(); }
+});
 $('#motion')?.addEventListener('click', () => { const paused = document.body.classList.toggle('motion-paused'); $('#motion').setAttribute('aria-pressed', String(paused)); updateMotionText(); });
 document.querySelectorAll('[data-source]').forEach((button) => button.addEventListener('click', () => { selected = button.dataset.source; renderStudy(); }));
 $('#search')?.addEventListener('input', () => { page = 0; renderCatalog(); });
@@ -324,7 +334,7 @@ if (matchMedia('(prefers-reduced-motion: no-preference)').matches && 'Intersecti
 }
 setLanguage();
 try {
-  const response = await fetch('data/atlas.json');
+  const response = await fetch('/data/atlas.json');
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   atlas = await response.json();
   render();

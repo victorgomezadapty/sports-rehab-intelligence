@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { redirectTarget } from './redirects.mjs';
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const web = fileURLToPath(new URL('../web/', import.meta.url));
 const root = existsSync(dist) ? dist : web;
@@ -14,7 +15,10 @@ const inside = (candidate) => {
 };
 const server = createServer(async (req, res) => {
   try {
-    const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    const url = new URL(req.url, 'http://localhost');
+    const redirect = redirectTarget(decodeURIComponent(url.pathname), url.search);
+    if (redirect) { res.writeHead(redirect.status, { Location: redirect.location, 'Cache-Control': 'no-store' }); res.end(); return; }
+    const pathname = decodeURIComponent(url.pathname);
     let file = resolve(root, `.${pathname}`);
     if (!inside(file) && file !== root.replace(/\/$/, '')) { res.writeHead(403); res.end(); return; }
     let info = await stat(file).catch(() => null);
