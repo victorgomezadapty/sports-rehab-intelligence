@@ -1,1 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://sports-rehab-intelligence.vercel.app/</loc></url><url><loc>https://sports-rehab-intelligence.vercel.app/evidence.html</loc></url><url><loc>https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/</loc></url><url><loc>https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/</loc></url><url><loc>https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/evidence.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/evidence.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/evidence.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/evidence.html"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/es/evidence.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/evidence.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/evidence.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/evidence.html"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/studies/running-injury-clinic/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/es/studies/running-injury-clinic/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/studies/running-injury-clinic/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/studies/running-injury-clinic/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/studies/competitive-runners-injury-risk/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/es/studies/competitive-runners-injury-risk/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/studies/competitive-runners-injury-risk/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/studies/competitive-runners-injury-risk/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/studies/european-football-injuries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/"/>
+  </url>
+  <url>
+    <loc>https://sports-rehab-intelligence.vercel.app/es/studies/european-football-injuries/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sports-rehab-intelligence.vercel.app/es/studies/european-football-injuries/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sports-rehab-intelligence.vercel.app/studies/european-football-injuries/"/>
+  </url>
+</urlset>

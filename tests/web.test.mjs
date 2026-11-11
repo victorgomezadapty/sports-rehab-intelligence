@@ -19,6 +19,11 @@ test('all relative public links and download targets resolve inside the static s
     for (const [, target] of read(file).matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (/^(https?:|#|data:)/.test(target) || target === '/') continue;
       if (target.startsWith('/#')) continue;
+      if (target === '/es/' || target === '/es/evidence.html' || target.startsWith('/es/studies/')) {
+        const relative = target.endsWith('/') ? `${target.slice(1)}index.html` : target.slice(1);
+        assert(existsSync(new URL(`web/${relative}`, root)), `${file}: ${target}`);
+        continue;
+      }
       if (routes.has(target)) continue;
       assert(existsSync(new URL(`web/${target}`, root)), `${file}: ${target}`);
     }

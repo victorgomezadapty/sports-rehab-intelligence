@@ -3,14 +3,14 @@
 const PELVIS_TILT = 12; // display offset between hip angle and thigh orientation
 const FLIGHT_LIFT = 6; // illustrative rise of the body during flight, in px
 const GROUND = 375;
-export const gaitReference = fetch('data/gait_reference.json').then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });
+export const gaitReference = fetch('/data/gait_reference.json').then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });
 const PILOT = { knee: 'KNEE_FLEX_PEAK_ANGLE', ankle: 'ANKLE_DF_PEAK_ANGLE', hip: 'HIP_EXT_PEAK_ANGLE' };
 
 export function createMovementExplorer() {
   const svg = document.querySelector('#runner-scene');
   if (!svg) return null;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const state = { paused: reduced.matches, visible: false, phase: .12, joint: 'knee', language: 'es', atlas: null, gait: null, offsets: null };
+  const state = { paused: reduced.matches, visible: false, phase: .12, joint: 'knee', language: (document.documentElement.lang || 'en').startsWith('es') ? 'es' : 'en', atlas: null, gait: null, offsets: null };
   const joints = { hip: { es: 'Cadera', en: 'Hip' }, knee: { es: 'Rodilla', en: 'Knee' }, ankle: { es: 'Tobillo', en: 'Ankle' } };
   const select = (selector) => document.querySelector(selector);
   const text = (es, en) => state.language === 'es' ? es : en;

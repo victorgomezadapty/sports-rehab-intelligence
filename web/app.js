@@ -4,8 +4,15 @@ import { summarizeAtlas, injuryBurden, regionBurden } from './synthesis.js';
 const PAIRED_AP = { low: 0.0020360947503472045, high: 0.0270284569281864 };
 import { createMovementExplorer, gaitReference } from './movement.js';
 
-let language = 'es';
-try { language = localStorage.getItem('sri-language') === 'en' ? 'en' : 'es'; } catch {}
+const spanishPath = (pathname = location.pathname) => pathname === '/es' || pathname.startsWith('/es/');
+const toEnglishPath = (pathname) => pathname === '/es' || pathname === '/es/' ? '/' : pathname.startsWith('/es/') ? (pathname.slice(3) || '/') : (pathname || '/');
+const toSpanishPath = (pathname) => { const bare = toEnglishPath(pathname); return bare === '/' ? '/es/' : `/es${bare.startsWith('/') ? bare : `/${bare}`}`; };
+let language = spanishPath() ? 'es' : 'en';
+try {
+  const stored = localStorage.getItem('sri-language');
+  if (!spanishPath() && stored === 'es') location.replace(toSpanishPath(location.pathname) + location.hash);
+  else if (!spanishPath() && stored !== 'en') localStorage.setItem('sri-language', 'en');
+} catch {}
 let atlas;
 let selected = 'ric';
 let selectedDomain = 'running_kinematics';
@@ -299,7 +306,11 @@ function renderReferences() {
 }
 
 function render() { renderHero(); renderRegions(); renderSynthesis(); renderStudy(); renderMatrix(); renderCatalog(); renderReferences(); movementExplorer?.update(atlas, language); }
-$('#language')?.addEventListener('click', () => { language = language === 'es' ? 'en' : 'es'; try { localStorage.setItem('sri-language', language); } catch {} setLanguage(); });
+$('#language')?.addEventListener('click', () => {
+  const next = language === 'es' ? 'en' : 'es';
+  try { localStorage.setItem('sri-language', next); } catch {}
+  if (!$('#language')?.getAttribute('href')) { language = next; setLanguage(); }
+});
 $('#motion')?.addEventListener('click', () => { const paused = document.body.classList.toggle('motion-paused'); $('#motion').setAttribute('aria-pressed', String(paused)); updateMotionText(); });
 document.querySelectorAll('[data-source]').forEach((button) => button.addEventListener('click', () => { selected = button.dataset.source; renderStudy(); }));
 $('#search')?.addEventListener('input', () => { page = 0; renderCatalog(); });
@@ -324,7 +335,7 @@ if (matchMedia('(prefers-reduced-motion: no-preference)').matches && 'Intersecti
 }
 setLanguage();
 try {
-  const response = await fetch('data/atlas.json');
+  const response = await fetch('/data/atlas.json');
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   atlas = await response.json();
   render();

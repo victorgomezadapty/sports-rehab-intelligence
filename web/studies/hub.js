@@ -1,9 +1,14 @@
 const STUDY_KEYS = ['running-clinic-language', 'runners-language', 'football-language'];
 const base = document.querySelector('meta[name="sri-study-base"]')?.content || '/';
 const originalFetch = window.fetch.bind(window);
+const onSpanish = () => location.pathname === '/es' || location.pathname.startsWith('/es/');
+const toEnglishPath = (pathname) => pathname === '/es' || pathname === '/es/' ? '/' : pathname.startsWith('/es/') ? (pathname.slice(3) || '/') : (pathname || '/');
+const toSpanishPath = (pathname) => { const bare = toEnglishPath(pathname); return bare === '/' ? '/es/' : `/es${bare.startsWith('/') ? bare : `/${bare}`}`; };
+
 window.fetch = (input, init) => {
-  if (typeof input === 'string' && input.startsWith('/') && !input.startsWith('//') && !input.startsWith('/studies/')) {
-    input = base + input.slice(1);
+  if (typeof input === 'string') {
+    if (input.startsWith('/') && !input.startsWith('//') && !input.startsWith('/studies/') && !input.startsWith('/es/')) input = base + input.slice(1);
+    else if (onSpanish() && !input.startsWith('/') && !input.startsWith('#') && !/^[a-z]+:/i.test(input)) input = base + input.replace(/^\.\//, '');
   }
   return originalFetch(input, init);
 };
@@ -16,11 +21,18 @@ const store = (lang) => {
 };
 
 try {
-  const shared = localStorage.getItem('sri-language') === 'en' ? 'en' : 'es';
-  for (const key of STUDY_KEYS) localStorage.setItem(key, shared);
+  const stored = localStorage.getItem('sri-language');
+  if (!onSpanish() && stored === 'es') {
+    for (const key of STUDY_KEYS) localStorage.setItem(key, 'en');
+    location.replace(toSpanishPath(location.pathname) + location.hash);
+  } else {
+    const paint = onSpanish() ? 'es' : 'en';
+    for (const key of STUDY_KEYS) localStorage.setItem(key, paint);
+    if (!onSpanish() && stored !== 'en' && stored !== 'es') localStorage.setItem('sri-language', 'en');
+  }
 } catch {}
 
-const currentLanguage = () => (document.documentElement.lang || 'es').startsWith('en') ? 'en' : 'es';
+const currentLanguage = () => (document.documentElement.lang || 'en').startsWith('es') ? 'es' : 'en';
 
 function paintHub() {
   const lang = currentLanguage();
@@ -42,24 +54,24 @@ function wireHub() {
   paintHub();
   placeHub();
   document.querySelector('[data-sri-lang]')?.addEventListener('click', () => {
-    const next = currentLanguage() === 'en' ? 'es' : 'en';
-    store(next);
-    const explicit = document.querySelector(`.languages [data-lang="${next}"]`);
-    const toggle = document.querySelector('.language-toggle, #lang');
-    if (explicit) explicit.click();
-    else if (toggle) toggle.click();
-    else document.documentElement.lang = next;
-    paintHub();
+    store(currentLanguage() === 'en' ? 'es' : 'en');
   });
   document.addEventListener('click', (event) => {
     const control = event.target.closest?.('.language-toggle, #lang, [data-lang]');
     if (!control || control.closest('.sri-hub')) return;
-    setTimeout(() => { store(currentLanguage()); paintHub(); }, 0);
-  });
+    const picked = control.dataset?.lang;
+    const next = picked === 'en' || picked === 'es' ? picked : (currentLanguage() === 'en' ? 'es' : 'en');
+    const target = (next === 'es' ? toSpanishPath(location.pathname) : toEnglishPath(location.pathname)) + location.hash;
+    if (location.pathname === target.split('#')[0]) return;
+    store(next);
+    event.preventDefault();
+    event.stopPropagation();
+    location.href = target;
+  }, true);
   window.addEventListener('resize', placeHub);
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireHub);
 else wireHub();
-new MutationObserver(() => { store(currentLanguage()); paintHub(); placeHub(); })
+new MutationObserver(() => { paintHub(); placeHub(); })
   .observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
